@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Search, X, Store, Phone, Package } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ProductCardSkeleton } from '@/components/skeleton'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -129,13 +130,13 @@ export default function MarketplacePage() {
           <Package className="size-12 text-muted-foreground/40" aria-hidden="true" />
           <h1 className="mt-4 font-heading text-lg font-bold text-foreground">Failed to load</h1>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">{error}</p>
-          <button
+          <Button
             type="button"
             onClick={() => window.location.reload()}
-            className="mt-6 rounded-2xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+            className="mt-6 rounded-2xl px-6 py-3 text-sm font-bold"
           >
             Try again
-          </button>
+          </Button>
         </div>
       </AppShell>
     )
@@ -169,21 +170,18 @@ export default function MarketplacePage() {
       <div className="overflow-x-auto no-scrollbar px-4 pt-4">
         <div className="flex gap-2" role="tablist" aria-label="Filter by category">
           {CATEGORIES.map((cat) => (
-            <button
+            <Button
               key={cat.key}
               role="tab"
               aria-selected={category === cat.key}
               onClick={() => setCategory(cat.key)}
-              className={cn(
-                'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors',
-                category === cat.key
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-accent',
-              )}
+              variant={category === cat.key ? 'default' : 'secondary'}
+              size="default"
+              className="shrink-0 rounded-full px-4 py-2 text-xs font-semibold"
             >
               <span className="mr-1">{cat.emoji}</span>
               {cat.label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -275,14 +273,16 @@ export default function MarketplacePage() {
               onClick={(e) => e.stopPropagation()}
               className="relative mx-auto w-full max-w-md rounded-t-3xl bg-background pb-8"
             >
-              <button
+              <Button
                 type="button"
                 onClick={() => setSelected(null)}
                 aria-label="Close"
-                className="absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur"
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-4 z-10 rounded-full bg-background/80 text-foreground backdrop-blur"
               >
-                <X className="size-4" />
-              </button>
+                <X className="size-4" aria-hidden="true" />
+              </Button>
 
               <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-muted">
                 <Image
