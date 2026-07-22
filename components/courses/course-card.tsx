@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Download, Check, WifiOff, ExternalLink, BookOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { type Course } from '@/lib/courses-data'
+import { type Course, type YearTheme } from '@/lib/courses-data'
 
 const DOWNLOADS_KEY = 'aces_downloaded_courses'
 
@@ -29,7 +29,7 @@ function saveDownload(code: string) {
   }
 }
 
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({ course, theme }: { course: Course; theme: YearTheme }) {
   const [downloaded, setDownloaded] = useState(false)
   const [offline, setOffline] = useState(false)
 
@@ -76,14 +76,25 @@ export function CourseCard({ course }: { course: Course }) {
   }
 
   return (
-    <div className="group rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+    <div
+      className="group rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1"
+      style={{ borderTop: `3px solid ${theme.primary}`, boxShadow: `0 0 0 rgba(0,0,0,0)`, transition: 'box-shadow 0.3s, transform 0.3s, border-color 0.3s' }}
+      onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 10px 25px -5px ${theme.shadow}`; e.currentTarget.style.borderColor = theme.border }}
+      onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.borderColor = '' }}
+    >
       <div className="flex items-start justify-between gap-2">
-        <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
+        <span
+          className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold"
+          style={{ backgroundColor: theme.light, color: theme.primary }}
+        >
           {course.code}
         </span>
         <div className="flex shrink-0 items-center gap-1.5">
           <span className="text-[10px] font-medium text-muted-foreground">{course.semester}</span>
-          <span className="inline-flex items-center rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-semibold text-success">
+          <span
+            className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold"
+            style={{ backgroundColor: theme.soft, color: theme.primary }}
+          >
             {course.credits} Cr
           </span>
         </div>
@@ -126,8 +137,9 @@ export function CourseCard({ course }: { course: Course }) {
             'flex size-9 shrink-0 items-center justify-center rounded-full transition-all duration-200 active:scale-[0.95]',
             downloaded
               ? 'bg-success/15 text-success'
-              : 'bg-secondary text-secondary-foreground hover:bg-accent',
+              : '',
           )}
+          style={!downloaded ? { backgroundColor: theme.light, color: theme.primary } : undefined}
         >
           {downloaded ? <Check className="size-4" aria-hidden="true" /> : <Download className="size-4" aria-hidden="true" />}
         </button>

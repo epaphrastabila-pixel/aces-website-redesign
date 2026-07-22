@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, BookOpen, GraduationCap, User, Clock } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
 import { CourseResourceItem } from '@/components/courses/course-resource-item'
-import { courses, yearLabels, semesterLabels, type Resource } from '@/lib/courses-data'
+import { courses, yearLabels, semesterLabels, yearThemes, type Resource } from '@/lib/courses-data'
 
 const sectionOrder: { key: Resource['type']; label: string }[] = [
   { key: 'slide', label: 'Lecture Slides' },
@@ -21,6 +21,7 @@ export default function CourseDetailPage() {
   const code = (params.code as string).toUpperCase()
 
   const course = courses.find((c) => c.code.toUpperCase() === code)
+  const theme = course ? yearThemes[course.year] : yearThemes[1]
 
   if (!course) {
     return (
@@ -97,7 +98,7 @@ export default function CourseDetailPage() {
               <h2 className="font-heading text-base font-bold text-foreground">{section.label}</h2>
               <div className="mt-3 flex flex-col gap-2">
                 {items.map((resource) => (
-                  <CourseResourceItem key={resource.id} resource={resource} />
+                  <CourseResourceItem key={resource.id} resource={resource} theme={theme} />
                 ))}
               </div>
             </div>

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Download, Check, Eye, FileText, FileType, Video, Archive } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { type Resource } from '@/lib/courses-data'
+import { type Resource, type YearTheme } from '@/lib/courses-data'
 
 const formatIcon: Record<string, typeof FileText> = {
   pdf: FileText,
@@ -13,19 +13,12 @@ const formatIcon: Record<string, typeof FileText> = {
   zip: Archive,
 }
 
-const formatColor: Record<string, string> = {
-  pdf: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400',
-  pptx: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400',
-  docx: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
-  mp4: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
-  zip: 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400',
-}
-
 type Props = {
   resource: Resource
+  theme: YearTheme
 }
 
-export function CourseResourceItem({ resource }: Props) {
+export function CourseResourceItem({ resource, theme }: Props) {
   const [downloaded, setDownloaded] = useState(false)
   const Icon = formatIcon[resource.format] || FileText
 
@@ -35,8 +28,8 @@ export function CourseResourceItem({ resource }: Props) {
   }
 
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:border-primary/20 hover:bg-secondary/30">
-      <span className={cn('flex size-10 shrink-0 items-center justify-center rounded-xl', formatColor[resource.format])}>
+    <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:bg-secondary/30" style={{ borderColor: theme.border }}>
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: theme.light, color: theme.primary }}>
         <Icon className="size-5" aria-hidden="true" />
       </span>
 
@@ -58,8 +51,9 @@ export function CourseResourceItem({ resource }: Props) {
             'flex size-9 items-center justify-center rounded-full transition-all duration-200 active:scale-[0.95]',
             downloaded
               ? 'bg-success/15 text-success'
-              : 'bg-primary text-primary-foreground hover:opacity-90',
+              : '',
           )}
+          style={!downloaded ? { backgroundColor: theme.primary, color: '#fff' } : undefined}
         >
           {downloaded ? <Check className="size-4" /> : <Download className="size-4" />}
         </button>

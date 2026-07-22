@@ -2,12 +2,13 @@
 
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getYears, getSemesters } from '@/lib/courses-data'
+import { getYears, getSemesters, type YearTheme } from '@/lib/courses-data'
 
 type Props = {
   year: number
   semester: string
   search: string
+  theme: YearTheme
   onYearChange: (y: number) => void
   onSemesterChange: (s: string) => void
   onSearchChange: (q: string) => void
@@ -16,7 +17,7 @@ type Props = {
 const years = getYears()
 const semesters = getSemesters()
 
-export function CourseFilterBar({ year, semester, search, onYearChange, onSemesterChange, onSearchChange }: Props) {
+export function CourseFilterBar({ year, semester, search, theme, onYearChange, onSemesterChange, onSearchChange }: Props) {
   return (
     <section className="sticky top-[61px] z-30 bg-background/95 px-4 pt-4 backdrop-blur">
       {/* Search */}
@@ -43,9 +44,12 @@ export function CourseFilterBar({ year, semester, search, onYearChange, onSemest
             className={cn(
               'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200',
               year === y
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'border border-border bg-background text-foreground hover:border-primary/30 hover:bg-secondary',
+                ? 'text-white shadow-sm'
+                : 'border bg-background text-foreground hover:bg-secondary',
             )}
+            style={year === y ? { backgroundColor: theme.primary } : { borderColor: theme.border, borderWidth: 1 }}
+            onMouseEnter={(e) => { if (year !== y) e.currentTarget.style.borderColor = theme.primary }}
+            onMouseLeave={(e) => { if (year !== y) e.currentTarget.style.borderColor = theme.border }}
           >
             Year {y}
           </button>

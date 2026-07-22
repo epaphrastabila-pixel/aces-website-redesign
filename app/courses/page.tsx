@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { AppShell } from '@/components/app-shell'
 import { CourseFilterBar } from '@/components/courses/course-filter-bar'
 import { CourseCard } from '@/components/courses/course-card'
-import { courses, getYears } from '@/lib/courses-data'
+import { courses, getYears, yearThemes } from '@/lib/courses-data'
 import { useNotifications } from '@/lib/notification-context'
 
 export default function CoursesPage() {
@@ -46,6 +46,7 @@ export default function CoursesPage() {
   }, [addNotification])
 
   const uniqueYears = getYears()
+  const theme = yearThemes[year]
 
   return (
     <AppShell title="Courses">
@@ -76,6 +77,7 @@ export default function CoursesPage() {
         year={year}
         semester={semester}
         search={search}
+        theme={theme}
         onYearChange={setYear}
         onSemesterChange={setSemester}
         onSearchChange={setSearch}
@@ -100,7 +102,7 @@ export default function CoursesPage() {
               className="flex flex-col gap-3"
             >
               {visible.map((course) => (
-                <CourseCard key={course.code} course={course} />
+                <CourseCard key={course.code} course={course} theme={theme} />
               ))}
             </motion.div>
           </AnimatePresence>

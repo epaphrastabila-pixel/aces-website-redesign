@@ -316,3 +316,19 @@ export function getYears(): number[] {
 export function getSemesters(): string[] {
   return ['Sem 1', 'Sem 2']
 }
+
+export type YearTheme = {
+  primary: string
+  light: string
+  border: string
+  soft: string
+  hover: string
+  shadow: string
+}
+
+export const yearThemes: Record<number, YearTheme> = {
+  1: { primary: '#2563EB', light: '#DBEAFE', border: '#93C5FD', soft: '#EFF6FF', hover: '#1D4ED8', shadow: 'rgba(37,99,235,0.15)' },
+  2: { primary: '#10B981', light: '#D1FAE5', border: '#6EE7B7', soft: '#ECFDF5', hover: '#059669', shadow: 'rgba(16,185,129,0.15)' },
+  3: { primary: '#F59E0B', light: '#FEF3C7', border: '#FCD34D', soft: '#FFFBEB', hover: '#D97706', shadow: 'rgba(245,158,11,0.15)' },
+  4: { primary: '#8B5CF6', light: '#EDE9FE', border: '#C4B5FD', soft: '#F5F3FF', hover: '#7C3AED', shadow: 'rgba(139,92,246,0.15)' },
+}
