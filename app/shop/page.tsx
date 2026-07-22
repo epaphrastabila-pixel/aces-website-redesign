@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Heart, ShoppingBag, Check } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { useCart } from '@/lib/cart-context'
 import { useWishlist } from '@/lib/wishlist-context'
 import { cn } from '@/lib/utils'
@@ -67,7 +68,7 @@ export default function ShopPage() {
                     {product.tag}
                   </span>
                 )}
-                <button
+                <Button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
@@ -76,10 +77,12 @@ export default function ShopPage() {
                       : addToWishlist({ id: product.id, name: product.name, price: product.price, image: product.image || '/placeholder.svg', addedAt: new Date().toISOString() })
                   }}
                   aria-label={isWishlisted(product.id) ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-                  className="absolute right-2 top-2 z-10 flex size-8 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 top-2 z-10 rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50"
                 >
                   <Heart className={cn('size-4', isWishlisted(product.id) && 'fill-current')} aria-hidden="true" />
-                </button>
+                </Button>
               </div>
             </Link>
             <div className="relative flex flex-1 flex-col gap-1 p-3">
@@ -88,7 +91,7 @@ export default function ShopPage() {
               </Link>
               <div className="mt-auto flex items-center justify-between pt-2">
                 <p className="text-sm font-bold text-navy-text">GHS {product.price}</p>
-                <button
+                <Button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
@@ -97,14 +100,16 @@ export default function ShopPage() {
                     setTimeout(() => setClickedId(null), 1500)
                   }}
                   aria-label={`Add ${product.name} to bag`}
-                  className="z-10 flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-110 active:scale-90"
+                  variant="default"
+                  size="icon"
+                  className="z-10 rounded-full"
                 >
                   {clickedId === product.id ? (
-                    <Check className="size-4 animate-check-bounce" aria-hidden="true" />
+                    <Check className="size-4" aria-hidden="true" />
                   ) : (
                     <ShoppingBag className="size-4" aria-hidden="true" />
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </article>
