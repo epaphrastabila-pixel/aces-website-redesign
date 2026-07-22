@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { useMarketplaceAuth } from '@/lib/marketplace-context'
 import { useAcesAuth } from '@/lib/aces-auth-context'
 
@@ -109,25 +110,29 @@ function LoginForm() {
               autoComplete="current-password"
               className="w-full rounded-xl border border-border bg-secondary px-4 py-3 pr-11 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             />
-            <button
+            <Button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
+              variant="ghost"
+              size="icon-xs"
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
             >
-              {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-            </button>
+              {showPassword ? <EyeOff className="size-4" aria-hidden="true" /> : <Eye className="size-4" aria-hidden="true" />}
+            </Button>
           </div>
         </div>
 
         <div className="text-right">
-          <button
+          <Button
             type="button"
             onClick={() => alert('Password reset coming soon. Reach out to the ACES office for help.')}
-            className="text-xs font-medium text-primary underline"
+            variant="link"
+            size="sm"
+            className="text-xs font-medium underline"
           >
             Forgot password?
-          </button>
+          </Button>
         </div>
 
         {error && (
@@ -136,13 +141,15 @@ function LoginForm() {
           </p>
         )}
 
-        <button
+        <Button
           type="submit"
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+          iconType="arrow"
+          size="lg"
+          className="w-full rounded-2xl text-sm font-bold"
         >
           Log in
           <ArrowRight className="size-4" aria-hidden="true" />
-        </button>
+        </Button>
 
         <p className="text-center text-xs text-muted-foreground">
           Don&apos;t have an account?{' '}
