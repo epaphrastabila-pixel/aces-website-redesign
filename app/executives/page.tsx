@@ -35,24 +35,6 @@ const executivesByYear: Record<string, ExecInfo[]> = {
     exe('Jedidiah Koomson', 'PRO', 'Year 3', 'Computer Engineering', '', '', '/images/executives/2025-26/pro.png'),
     exe('Jeslove Serwaa Bekoe', "Women's Commissioner", 'Year 3', 'Computer Engineering', '', '', '/images/executives/2025-26/womens-commissioner.png'),
   ],
-  '2024/25': [
-    exe('Joseph Baidoo', 'President', 'Year 4', 'Computer Engineering', 'j.baidoo@aces.edu', 'https://linkedin.com/in/josephbaidoo'),
-    exe('Mercy Frimpong', 'Vice President', 'Year 4', 'Computer Engineering', 'm.frimpong@aces.edu', 'https://linkedin.com/in/mercyfrimpong'),
-    exe('Daniel Amankwah', 'General Secretary', 'Year 3', 'Computer Engineering', 'd.amankwah@aces.edu', 'https://linkedin.com/in/danielamankwah'),
-    exe('Priscilla Sarpong', 'Financial Secretary', 'Year 4', 'Computer Engineering', 'p.sarpong@aces.edu', 'https://linkedin.com/in/priscillasarpong'),
-    exe('Emmanuel Owusu', 'Organizing Secretary', 'Year 3', 'Computer Engineering', 'e.owusu@aces.edu', 'https://linkedin.com/in/emmanuelowusu'),
-    exe('Rita Tetteh', 'PRO', 'Year 3', 'Computer Engineering', 'r.tetteh@aces.edu', 'https://linkedin.com/in/ritatetteh'),
-    exe('Sarah Boakye', "Women's Commissioner", 'Year 4', 'Computer Engineering', 's.boakye@aces.edu', 'https://linkedin.com/in/sarahboakye'),
-  ],
-  '2023/24': [
-    exe('Francis Ofori', 'President', 'Year 4', 'Computer Engineering', 'f.ofori@aces.edu', 'https://linkedin.com/in/francisofori'),
-    exe('Gifty Nkrumah', 'Vice President', 'Year 4', 'Computer Engineering', 'g.nkrumah@aces.edu', 'https://linkedin.com/in/giftynkrumah'),
-    exe('Bernard Anim', 'General Secretary', 'Year 3', 'Computer Engineering', 'b.anim@aces.edu', 'https://linkedin.com/in/bernardanim'),
-    exe('Linda Twumasi', 'Financial Secretary', 'Year 4', 'Computer Engineering', 'l.twumasi@aces.edu', 'https://linkedin.com/in/lindatwumasi'),
-    exe('Samuel Mensah', 'Organizing Secretary', 'Year 3', 'Computer Engineering', 's.mensah@aces.edu', 'https://linkedin.com/in/samuelmensah'),
-    exe('Comfort Asare', 'PRO', 'Year 3', 'Computer Engineering', 'c.asare@aces.edu', 'https://linkedin.com/in/comfortasare'),
-    exe('Vera Darko', "Women's Commissioner", 'Year 4', 'Computer Engineering', 'v.darko@aces.edu', 'https://linkedin.com/in/veradarko'),
-  ],
 }
 
 const years = Object.keys(executivesByYear)
