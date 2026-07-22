@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { BookOpen, GraduationCap, Layers } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { CourseFilterBar } from '@/components/courses/course-filter-bar'
 import { CourseCard } from '@/components/courses/course-card'
 import { courses, getYears, yearThemes } from '@/lib/courses-data'
@@ -118,12 +119,12 @@ export default function CoursesPage() {
               Check back later or enable notifications.
             </p>
             {!notified && (
-              <button
+              <Button
                 onClick={onNotify}
-                className="mt-4 rounded-full bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                className="mt-4 rounded-full px-5 py-2.5 text-xs font-bold"
               >
                 Notify Me
-              </button>
+              </Button>
             )}
           </motion.div>
         )}
