@@ -113,7 +113,7 @@ export default function MarketplacePage() {
             Discover products &amp; services from fellow KNUST students.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3 px-4 pt-4 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 px-4 pt-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
@@ -195,7 +195,7 @@ export default function MarketplacePage() {
       </div>
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 px-4 pt-3 pb-8 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 px-4 pt-3 pb-8">
           {filtered.map((product, i) => (
             <article
               key={product.id}
@@ -206,7 +206,7 @@ export default function MarketplacePage() {
                 onClick={() => setSelected(product)}
                 className="w-full text-left"
               >
-                <div className="relative h-44 overflow-hidden bg-muted">
+                <div className="relative h-48 overflow-hidden bg-muted">
                   <Image
                     src={productImage(product)}
                     alt={product.name}
@@ -215,18 +215,19 @@ export default function MarketplacePage() {
                     className="object-cover transition-transform duration-300 group-hover/card:scale-105"
                     priority={i < 4}
                   />
-                  <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
-                    {categoryEmoji[product.category] || '📦'} {product.category}
+                  <span className="absolute left-2 top-2 flex max-w-[calc(100%-16px)] items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
+                    <span className="shrink-0">{categoryEmoji[product.category] || '📦'}</span>
+                    <span className="truncate">{product.category}</span>
                   </span>
                 </div>
-                <div className="p-4">
+                <div className="p-5">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
+                    <h3 className="min-w-0 flex-1 text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
                     <span className="shrink-0 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
                       GH₵ {product.price}
                     </span>
                   </div>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground line-clamp-2">{product.description}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">{product.description}</p>
                   <div className="my-3 border-t border-border" />
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
