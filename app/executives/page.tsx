@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { ChevronDown, Eye } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { AppShell } from '@/components/app-shell'
 import { ExecutiveModal, type ExecutiveData } from '@/components/executives/executive-modal'
 
@@ -139,14 +140,15 @@ export default function ExecutivesPage() {
               <p className="mt-0.5 text-[10px] text-muted-foreground">
                 {exec.year} &middot; {exec.department}
               </p>
-              <button
-                type="button"
+              <Button
+                size="sm"
+                variant="secondary"
                 onClick={() => setProfile(exec)}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-secondary px-4 py-2 text-[11px] font-semibold text-foreground transition-all duration-200 hover:bg-accent active:scale-[0.97]"
+                className="mt-3 text-[11px]"
               >
                 <Eye className="size-3.5" aria-hidden="true" />
                 View Profile
-              </button>
+              </Button>
             </div>
           ))}
         </div>

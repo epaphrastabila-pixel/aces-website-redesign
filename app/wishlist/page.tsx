@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Heart, ShoppingBag, Trash2, ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { AppShell } from '@/components/app-shell'
 import { useWishlist } from '@/lib/wishlist-context'
 import { useCart } from '@/lib/cart-context'
@@ -25,13 +26,13 @@ export default function WishlistPage() {
         {items.length > 0 && (
           <div className="mt-1 flex items-center justify-between">
             <p className="text-xs text-muted-foreground">{items.length} item{items.length !== 1 ? 's' : ''}</p>
-            <button
-              type="button"
+            <Button
+              variant="link"
               onClick={clearWishlist}
-              className="text-xs font-medium text-destructive underline"
+              className="text-xs font-medium text-destructive underline h-auto p-0"
             >
               Clear all
-            </button>
+            </Button>
           </div>
         )}
       </section>
@@ -65,25 +66,26 @@ export default function WishlistPage() {
                 <p className="mt-0.5 text-xs font-medium text-primary">GHS {item.price}</p>
               </div>
               <div className="flex gap-1">
-                <button
-                  type="button"
+                <Button
+                  size="sm"
                   onClick={() => {
                     addToCart({ id: item.id, name: item.name, price: item.price, image: item.image })
                     removeFromWishlist(item.id)
                   }}
                   aria-label={`Add ${item.name} to cart`}
-                  className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+                  className="size-9 p-0"
                 >
                   <ShoppingBag className="size-4" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
                   onClick={() => removeFromWishlist(item.id)}
                   aria-label={`Remove ${item.name} from wishlist`}
-                  className="flex size-9 items-center justify-center rounded-xl bg-secondary text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                  className="size-9 p-0 hover:bg-destructive/10 hover:text-destructive"
                 >
                   <Trash2 className="size-4" aria-hidden="true" />
-                </button>
+                </Button>
               </div>
             </div>
           ))}

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Package, Plus, Edit3, Trash2, Store, ArrowLeft, X, Check } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
 import { useMarketplaceAuth } from '@/lib/marketplace-context'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 type Product = {
@@ -169,13 +170,13 @@ export default function VendorDashboardPage() {
             <h1 className="font-heading text-xl font-bold text-foreground">Your store</h1>
             <p className="mt-0.5 text-xs text-muted-foreground">Welcome, {user?.name}</p>
           </div>
-          <button
-            type="button"
+          <Button
+            size="sm"
+            variant="secondary"
             onClick={logout}
-            className="rounded-xl bg-secondary px-4 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent"
           >
             Sign out
-          </button>
+          </Button>
         </div>
       </section>
 
@@ -267,13 +268,13 @@ export default function VendorDashboardPage() {
               </p>
             )}
 
-            <button
+            <Button
               type="submit"
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+              className="mt-4 w-full py-3 text-sm font-bold"
             >
               <Check className="size-4" aria-hidden="true" />
               {editingId ? 'Save changes' : 'Add product'}
-            </button>
+            </Button>
           </form>
         </section>
       )}
@@ -303,42 +304,45 @@ export default function VendorDashboardPage() {
                   <p className="text-xs font-medium text-primary">GH₵ {p.price}</p>
                 </div>
                 <div className="flex gap-1">
-                  <button
-                    type="button"
+                  <Button
+                    size="sm"
+                    variant="secondary"
                     onClick={() => startEdit(p.id)}
                     aria-label={`Edit ${p.name}`}
-                    className="flex size-9 items-center justify-center rounded-xl bg-secondary text-muted-foreground transition-colors hover:bg-accent"
+                    className="size-9 p-0"
                   >
                     <Edit3 className="size-4" />
-                  </button>
+                  </Button>
                   {deleteId === p.id ? (
                     <div className="flex gap-1">
-                      <button
-                        type="button"
+                      <Button
+                        size="sm"
                         onClick={() => confirmDelete(p.id)}
                         aria-label="Confirm delete"
-                        className="flex size-9 items-center justify-center rounded-xl bg-destructive/10 text-destructive"
+                        className="size-9 p-0 bg-destructive/10 text-destructive hover:bg-destructive/20"
                       >
                         <Check className="size-4" />
-                      </button>
-                      <button
-                        type="button"
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="secondary"
                         onClick={() => setDeleteId(null)}
                         aria-label="Cancel delete"
-                        className="flex size-9 items-center justify-center rounded-xl bg-secondary text-muted-foreground"
+                        className="size-9 p-0"
                       >
                         <X className="size-4" />
-                      </button>
+                      </Button>
                     </div>
                   ) : (
-                    <button
-                      type="button"
+                    <Button
+                      size="sm"
+                      variant="secondary"
                       onClick={() => setDeleteId(p.id)}
                       aria-label={`Delete ${p.name}`}
-                      className="flex size-9 items-center justify-center rounded-xl bg-secondary text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                      className="size-9 p-0 hover:bg-destructive/10 hover:text-destructive"
                     >
                       <Trash2 className="size-4" />
-                    </button>
+                    </Button>
                   )}
                 </div>
               </li>

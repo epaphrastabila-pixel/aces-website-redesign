@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { ChevronRight, Save, User } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { AppShell } from '@/components/app-shell'
 
 const STORAGE_KEY = 'aces_account_settings'
@@ -108,13 +109,16 @@ export default function AccountSettingsPage() {
           </select>
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+          size="lg"
+          showSuccess={saved}
+          successText="Saved!"
+          className="w-full rounded-2xl text-sm font-bold"
         >
           <Save className="size-4" aria-hidden="true" />
-          {saved ? 'Saved!' : 'Save changes'}
-        </button>
+          Save changes
+        </Button>
       </form>
     </AppShell>
   )

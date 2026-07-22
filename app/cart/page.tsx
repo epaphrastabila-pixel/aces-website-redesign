@@ -14,6 +14,7 @@ import {
   X,
   Check,
 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { AppShell } from '@/components/app-shell'
 import { AcesMark } from '@/components/aces-logo'
 import { useCart } from '@/lib/cart-context'
@@ -93,13 +94,13 @@ export default function CartPage() {
     return (
       <AppShell title="Checkout">
         <section className="px-4 pt-5">
-          <button
-            type="button"
+          <Button
+            variant="link"
             onClick={() => setStatus('cart')}
-            className="mb-3 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+            className="mb-3 h-auto p-0 text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             ← Back to bag
-          </button>
+          </Button>
           <h1 className="font-heading text-xl font-bold text-navy-text">
             {fulfillment === 'pickup' ? 'Pickup details' : 'Delivery details'}
           </h1>
@@ -220,12 +221,12 @@ export default function CartPage() {
                 <span className="font-heading text-base font-bold text-secondary-foreground">GHS {grandTotal}</span>
               </div>
             </div>
-            <button
+            <Button
               type="submit"
-              className="w-full rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+              className="w-full rounded-full py-3.5 text-sm font-semibold"
             >
               Place order · GHS {grandTotal}
-            </button>
+            </Button>
           </form>
         </section>
       </AppShell>
@@ -344,14 +345,15 @@ export default function CartPage() {
                       </button>
                     </div>
                   </div>
-                  <button
-                    type="button"
+                  <Button
+                    variant="ghost"
+                    size="sm"
                     onClick={() => removeFromCart(item.id, item.selectedSize, item.selectedColor)}
                     aria-label={`Remove ${item.name} from bag`}
-                    className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                    className="size-9 rounded-full p-0 hover:bg-destructive/10 hover:text-destructive"
                   >
                     <Trash2 className="size-4" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -428,13 +430,13 @@ export default function CartPage() {
                       className="w-full rounded-xl border border-border bg-card py-2.5 pl-9 pr-3 text-sm outline-none focus:border-primary"
                     />
                   </div>
-                  <button
-                    type="button"
+                  <Button
+                    size="sm"
                     onClick={applyCoupon}
-                    className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                    className="px-4 py-2.5 text-sm"
                   >
                     Apply
-                  </button>
+                  </Button>
                 </div>
               )}
               {couponError && (
@@ -472,14 +474,13 @@ export default function CartPage() {
                 </span>
               </div>
             </div>
-            <button
-              type="button"
+            <Button
               onClick={() => setStatus('address')}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+              className="mt-4 w-full rounded-full py-3.5 text-sm font-semibold"
+              iconType="arrow"
             >
               Checkout · GHS {grandTotal}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </button>
+            </Button>
           </section>
         </>
       )}

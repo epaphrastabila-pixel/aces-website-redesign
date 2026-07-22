@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Bell, CheckCheck, Trash2, ArrowLeft, ShoppingBag, Calendar, UserPlus, Store } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { useNotifications, type AppNotification } from '@/lib/notification-context'
 import { cn } from '@/lib/utils'
 
@@ -39,14 +40,16 @@ function NotifItem({ notif }: { notif: AppNotification }) {
             {notif.title}
           </p>
           {!notif.read && (
-            <button
+            <Button
               type="button"
               onClick={() => markRead(notif.id)}
               aria-label="Mark as read"
-              className="shrink-0 text-muted-foreground hover:text-foreground"
+              variant="ghost"
+              size="icon-xs"
+              className="text-muted-foreground"
             >
               <CheckCheck className="size-4" aria-hidden="true" />
-            </button>
+            </Button>
           )}
         </div>
         <p className="mt-0.5 text-xs text-muted-foreground">{notif.body}</p>
@@ -90,17 +93,19 @@ export default function NotificationsPage() {
           {notifications.length > 0 && (
             <div className="flex items-center gap-2">
               {unreadCount > 0 && (
-                <button
+                <Button
                   type="button"
                   onClick={markAllRead}
-                  className="text-xs font-medium text-primary underline"
+                  variant="link"
+                  size="sm"
+                  className="text-xs font-medium underline"
                 >
                   Mark all read
-                </button>
+                </Button>
               )}
-              <button type="button" onClick={clearAll} aria-label="Clear all notifications" className="text-muted-foreground hover:text-destructive">
+              <Button type="button" onClick={clearAll} aria-label="Clear all notifications" variant="ghost" size="icon-xs" className="text-muted-foreground hover:text-destructive">
                 <Trash2 className="size-4" aria-hidden="true" />
-              </button>
+              </Button>
             </div>
           )}
         </div>

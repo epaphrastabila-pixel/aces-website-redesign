@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Minus, Plus, ShoppingBag, Check, Package } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { AppShell } from '@/components/app-shell'
 import { useCart } from '@/lib/cart-context'
 import { getProductById, products, type ColorVariant } from '@/lib/products'
@@ -269,11 +270,10 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        <button
-          type="button"
+        <Button
           onClick={handleAddToCart}
           disabled={!canAddToCart}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:opacity-90 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:scale-100"
+          className="mt-6 w-full rounded-full py-3.5 text-sm font-semibold hover:shadow-lg hover:shadow-primary/30 disabled:opacity-40 disabled:hover:shadow-none disabled:hover:scale-100"
         >
           {soldOut ? (
             <>Out of stock</>
@@ -292,7 +292,7 @@ export default function ProductDetailPage() {
                   : `Add to bag — GHS ${product.price * qty}`}
             </>
           )}
-        </button>
+        </Button>
 
         <div className="mt-6 rounded-2xl bg-secondary/60 p-4">
           <h2 className="text-sm font-semibold text-navy">Details</h2>
