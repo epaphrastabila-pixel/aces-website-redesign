@@ -25,6 +25,7 @@ import {
 import { AppShell } from '@/components/app-shell'
 import { useRegistration } from '@/lib/registration-context'
 import { useAcesAuth } from '@/lib/aces-auth-context'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 const quickActions = [
@@ -101,14 +102,16 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
     <div className="fixed inset-0 z-50 mx-auto flex w-full max-w-md items-end justify-center">
       <div className="absolute inset-0 bg-navy/50" onClick={onClose} aria-hidden="true" />
       <div className="relative max-h-[85vh] w-full overflow-y-auto rounded-t-3xl bg-background px-6 pb-8 pt-6 shadow-2xl">
-        <button
+        <Button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-secondary text-muted-foreground"
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-4 rounded-full text-muted-foreground"
         >
           <X className="size-4" aria-hidden="true" />
-        </button>
+        </Button>
 
         {submitted ? (
           <div className="py-6 text-center">
@@ -173,12 +176,12 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
                   className="mt-1.5 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
                 />
               </div>
-              <button
+              <Button
                 type="submit"
-                className="w-full rounded-2xl bg-primary py-3 text-sm font-bold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                className="w-full rounded-2xl py-3 text-sm font-bold"
               >
                 Submit & join
-              </button>
+              </Button>
             </form>
           </>
         )}
@@ -209,16 +212,16 @@ export default function HomePage() {
           <p className="flex-1 text-xs font-semibold text-navy">
             CODEFEST is here! Register now for the challenges
           </p>
-          <button
+          <Button
             type="button"
             onClick={() => {
               if (!isAuthenticated) { router.push('/login?redirect=/'); return }
               register('CodeFest 2026')
             }}
-            className="shrink-0 rounded-full bg-primary px-3 py-1.5 text-[10px] font-bold text-primary-foreground transition-all duration-200 active:scale-[0.97]"
+            className="shrink-0 rounded-full px-3 py-1.5 text-[10px] font-bold"
           >
             Register Now →
-          </button>
+          </Button>
         </div>
       </section>
 
@@ -341,7 +344,7 @@ export default function HomePage() {
                         <ExternalLink className="size-3.5" aria-hidden="true" />
                       </a>
                     ) : (
-                      <button
+                      <Button
                         type="button"
                         onClick={() => {
                           if (!isAuthenticated) { router.push('/login?redirect=/'); return }
@@ -349,14 +352,16 @@ export default function HomePage() {
                         }}
                         disabled={(left === 0 && !regd) || (!isAuthenticated && regd)}
                         aria-label={regd ? 'Registered' : `Register for ${event.name}`}
-                        className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-110 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                        variant="default"
+                        size="icon"
+                        className="rounded-full"
                       >
                         {regd ? (
-                          <Check className="size-3.5 animate-check-bounce" aria-hidden="true" />
+                          <Check className="size-3.5" aria-hidden="true" />
                         ) : (
                           <UserCheck className="size-3.5" aria-hidden="true" />
                         )}
-                      </button>
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -392,7 +397,7 @@ export default function HomePage() {
                     {club.members} member{club.members !== 1 ? 's' : ''} · {Math.max(0, spots)} spot{spots !== 1 ? 's' : ''} left
                   </p>
                   <div className="mt-auto flex items-center justify-end pt-2">
-                    <button
+                    <Button
                       type="button"
                       onClick={() => {
                         if (member) return
@@ -401,14 +406,16 @@ export default function HomePage() {
                       }}
                       disabled={member}
                       aria-label={member ? 'Member' : `Join ${club.name}`}
-                      className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-110 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                      variant="default"
+                      size="icon"
+                      className="rounded-full"
                     >
                       {member ? (
-                        <Check className="size-3.5 animate-check-bounce" aria-hidden="true" />
+                        <Check className="size-3.5" aria-hidden="true" />
                       ) : (
                         <UserPlus className="size-3.5" aria-hidden="true" />
                       )}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
