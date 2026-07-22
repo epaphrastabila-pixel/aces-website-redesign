@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Store, Phone, Package, X } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { Button } from '@/components/ui/button'
 import { AnimatePresence, motion } from 'framer-motion'
 
 type Product = {
@@ -231,14 +232,16 @@ export default function BusinessPage() {
               onClick={(e) => e.stopPropagation()}
               className="relative mx-auto w-full max-w-md rounded-t-3xl bg-background pb-8"
             >
-              <button
+              <Button
                 type="button"
                 onClick={() => setSelected(null)}
                 aria-label="Close"
-                className="absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur"
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-4 z-10 rounded-full bg-background/80 text-foreground backdrop-blur"
               >
-                <X className="size-4" />
-              </button>
+                <X className="size-4" aria-hidden="true" />
+              </Button>
 
               <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-muted">
                 <Image
