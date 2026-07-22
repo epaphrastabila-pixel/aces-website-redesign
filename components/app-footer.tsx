@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export function AppFooter() {
   return (
@@ -109,12 +110,13 @@ export function AppFooter() {
               placeholder="your@email.com"
               className="min-w-0 flex-1 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs text-navy-foreground placeholder:text-navy-foreground/40 outline-none focus:border-primary"
             />
-            <button
+            <Button
               type="submit"
-              className="shrink-0 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+              size="sm"
+              className="shrink-0 rounded-lg px-3 py-2 text-xs font-semibold"
             >
               Subscribe
-            </button>
+            </Button>
           </div>
         </div>
 

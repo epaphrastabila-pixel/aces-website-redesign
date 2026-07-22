@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { useSearch } from '@/lib/search-context'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export function SearchOverlay() {
@@ -51,9 +52,9 @@ export function SearchOverlay() {
             aria-label="Search"
           />
           {query && (
-            <button type="button" onClick={clear} aria-label="Clear search" className="text-muted-foreground hover:text-foreground">
+            <Button type="button" onClick={clear} aria-label="Clear search" variant="ghost" size="icon-xs" className="text-muted-foreground">
               <X className="size-4" aria-hidden="true" />
-            </button>
+            </Button>
           )}
           <kbd className="hidden rounded-md border border-border px-1.5 text-[10px] text-muted-foreground sm:inline">ESC</kbd>
         </div>

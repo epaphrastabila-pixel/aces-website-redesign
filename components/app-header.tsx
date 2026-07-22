@@ -8,6 +8,7 @@ import { AcesLogo, AcesMark } from '@/components/aces-logo'
 import { useTheme } from '@/components/theme-provider'
 import { useSearch } from '@/lib/search-context'
 import { useNotifications } from '@/lib/notification-context'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 const primaryLinks = [
@@ -59,14 +60,16 @@ export function AppHeader({ title }: { title?: string }) {
           </Link>
         )}
         <div className="flex items-center gap-1.5">
-          <button
+          <Button
             type="button"
             onClick={() => setSearchOpen(true)}
             aria-label="Search"
-            className="flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary"
+            variant="ghost"
+            size="icon"
+            className="rounded-full text-muted-foreground hover:bg-secondary"
           >
             <Search className="size-5" aria-hidden="true" />
-          </button>
+          </Button>
           <Link
             href="/notifications"
             aria-label={`Notifications, ${unreadCount} unread`}
@@ -79,15 +82,17 @@ export function AppHeader({ title }: { title?: string }) {
               </span>
             )}
           </Link>
-          <button
+          <Button
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
-            className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-accent"
+            variant="secondary"
+            size="icon"
+            className="rounded-full border-none hover:bg-accent"
           >
             <Menu className="size-5" aria-hidden="true" />
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -116,22 +121,26 @@ export function AppHeader({ title }: { title?: string }) {
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
             <AcesLogo />
             <div className="flex items-center gap-2">
-              <button
+              <Button
                 type="button"
                 onClick={toggle}
                 aria-label={mounted ? `Switch to ${theme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
-                className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-accent"
+                variant="secondary"
+                size="icon"
+                className="rounded-full border-none hover:bg-accent"
               >
                 {mounted ? (theme === 'light' ? <Moon className="size-5" aria-hidden="true" /> : <Sun className="size-5" aria-hidden="true" />) : <div className="size-5" />}
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground"
+                variant="secondary"
+                size="icon"
+                className="rounded-full border-none"
               >
                 <X className="size-5" aria-hidden="true" />
-              </button>
+              </Button>
             </div>
           </div>
           <nav aria-label="Secondary" className="flex-1 overflow-y-auto px-3 py-4">
@@ -162,10 +171,11 @@ export function AppHeader({ title }: { title?: string }) {
 
             {/* More section */}
             <div className="mt-3">
-              <button
+              <Button
                 type="button"
                 onClick={() => setShowMore(!showMore)}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted"
+                variant="ghost"
+                className="w-full rounded-xl px-3 py-3 text-sm font-medium text-muted-foreground"
               >
                 <span className="flex size-9 items-center justify-center rounded-lg bg-secondary text-muted-foreground">
                   <Lightbulb className="size-4" aria-hidden="true" />
@@ -175,7 +185,7 @@ export function AppHeader({ title }: { title?: string }) {
                   className={cn('ml-auto size-4 transition-transform duration-200', showMore && 'rotate-180')}
                   aria-hidden="true"
                 />
-              </button>
+              </Button>
               {showMore && (
                 <ul className="ml-3 mt-1 flex flex-col gap-1 border-l-2 border-border pl-3">
                   {secondaryLinks.map((link) => {

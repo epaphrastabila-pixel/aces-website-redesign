@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Bell, Check } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export function NotifyMeForm({ topic }: { topic: string }) {
   const [email, setEmail] = useState('')
@@ -40,13 +41,13 @@ export function NotifyMeForm({ topic }: { topic: string }) {
         placeholder="your.name@st.knust.edu.gh"
         className="w-full rounded-full border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25"
       />
-      <button
+      <Button
         type="submit"
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+        className="rounded-full px-5 py-3 text-sm font-semibold"
       >
         <Bell className="size-4" aria-hidden="true" />
         Notify me when {topic} arrive
-      </button>
+      </Button>
     </form>
   )
 }

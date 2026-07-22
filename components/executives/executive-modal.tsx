@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
 import { X, Mail, ExternalLink, GraduationCap, Building } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export type ExecutiveData = {
@@ -64,14 +65,16 @@ export function ExecutiveModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
-        <button
+        <Button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:bg-accent"
+          variant="secondary"
+          size="icon"
+          className="absolute right-4 top-4 size-9 rounded-full border-none text-muted-foreground hover:bg-accent"
         >
           <X className="size-4" aria-hidden="true" />
-        </button>
+        </Button>
 
         {/* Photo */}
         <div className="flex justify-center">

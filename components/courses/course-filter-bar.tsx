@@ -1,6 +1,7 @@
 'use client'
 
 import { Search } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { getYears, getSemesters, type YearTheme } from '@/lib/courses-data'
 
@@ -58,21 +59,18 @@ export function CourseFilterBar({ year, semester, search, theme, onYearChange, o
         <span className="mx-1 shrink-0 text-muted-foreground/30">|</span>
 
         {semesters.map((s) => (
-          <button
+          <Button
             key={s}
             type="button"
             role="tab"
             aria-selected={semester === s}
             onClick={() => onSemesterChange(s)}
-            className={cn(
-              'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200',
-              semester === s
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'border border-border bg-background text-foreground hover:border-primary/30 hover:bg-secondary',
-            )}
+            variant={semester === s ? 'default' : 'outline'}
+            size="default"
+            className="shrink-0 rounded-full px-4 py-2 text-xs font-semibold"
           >
             {s}
-          </button>
+          </Button>
         ))}
       </div>
     </section>

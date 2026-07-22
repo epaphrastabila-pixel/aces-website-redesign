@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { PartyPopper, X } from 'lucide-react'
 import { AppHeader } from '@/components/app-header'
 import { AppFooter } from '@/components/app-footer'
+import { Button } from '@/components/ui/button'
 import { BottomNav } from '@/components/bottom-nav'
 import { useCart } from '@/lib/cart-context'
 
@@ -25,9 +26,9 @@ function CartToast() {
             View bag
           </Link>
         </div>
-        <button type="button" onClick={dismissToast} aria-label="Dismiss notification" className="text-navy-foreground/70">
+        <Button type="button" onClick={dismissToast} aria-label="Dismiss notification" variant="ghost" size="icon-xs" className="text-navy-foreground/70">
           <X className="size-4" aria-hidden="true" />
-        </button>
+        </Button>
       </div>
     </div>
   )

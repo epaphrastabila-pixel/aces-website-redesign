@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Download, Check, Eye, FileText, FileType, Video, Archive } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { type Resource, type YearTheme } from '@/lib/courses-data'
 
@@ -43,28 +44,27 @@ export function CourseResourceItem({ resource, theme }: Props) {
       </div>
 
       <div className="flex shrink-0 items-center gap-1">
-        <button
+        <Button
           type="button"
           onClick={handleDownload}
           aria-label={`Download ${resource.name}`}
-          className={cn(
-            'flex size-9 items-center justify-center rounded-full transition-all duration-200 active:scale-[0.95]',
-            downloaded
-              ? 'bg-success/15 text-success'
-              : '',
-          )}
-          style={!downloaded ? { backgroundColor: theme.primary, color: '#fff' } : undefined}
+          variant="default"
+          size="icon"
+          className={cn('size-9 rounded-full border-none', downloaded ? 'bg-success/15 text-success' : '')}
+          style={!downloaded ? { backgroundColor: theme.primary, color: '#fff' } as React.CSSProperties : undefined}
         >
           {downloaded ? <Check className="size-4" /> : <Download className="size-4" />}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           onClick={() => {}}
           aria-label={`Preview ${resource.name}`}
-          className="flex size-9 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-all duration-200 hover:bg-accent active:scale-[0.95]"
+          variant="secondary"
+          size="icon"
+          className="size-9 rounded-full border-none hover:bg-accent"
         >
           <Eye className="size-4" />
-        </button>
+        </Button>
       </div>
     </div>
   )

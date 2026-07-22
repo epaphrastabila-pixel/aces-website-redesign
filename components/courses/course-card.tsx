@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Download, Check, WifiOff, ExternalLink, BookOpen } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { type Course, type YearTheme } from '@/lib/courses-data'
 
@@ -129,20 +130,17 @@ export function CourseCard({ course, theme }: { course: Course; theme: YearTheme
           <ExternalLink className="size-3.5" aria-hidden="true" />
           View Resources
         </Link>
-        <button
+        <Button
           type="button"
           onClick={handleDownload}
           aria-label={downloaded ? `Already downloaded ${course.code}` : `Download ${course.code} materials`}
-          className={cn(
-            'flex size-9 shrink-0 items-center justify-center rounded-full transition-all duration-200 active:scale-[0.95]',
-            downloaded
-              ? 'bg-success/15 text-success'
-              : '',
-          )}
-          style={!downloaded ? { backgroundColor: theme.light, color: theme.primary } : undefined}
+          variant="default"
+          size="icon"
+          className={cn('size-9 rounded-full border-none', downloaded ? 'bg-success/15 text-success' : '')}
+          style={!downloaded ? { backgroundColor: theme.light, color: theme.primary } as React.CSSProperties : undefined}
         >
           {downloaded ? <Check className="size-4" aria-hidden="true" /> : <Download className="size-4" aria-hidden="true" />}
-        </button>
+        </Button>
       </div>
     </div>
   )
