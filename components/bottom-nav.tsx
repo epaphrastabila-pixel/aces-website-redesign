@@ -32,27 +32,58 @@ export function BottomNav() {
         {tabs.map((tab) => {
           const active = isActive(tab.href)
           const Icon = tab.icon
+          const isMarketplace = tab.href === '/marketplace'
           return (
             <li key={tab.href} className="flex-1">
-              <Link
-                href={tab.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
-                  active ? 'text-primary' : 'text-muted-foreground',
-                )}
-              >
-                <span className="relative">
-                  <Icon className="size-5" aria-hidden="true" />
-                  {tab.href === '/shop' && count > 0 && (
-                    <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
-                      {count}
-                    </span>
+              {isMarketplace ? (
+                <Link
+                  href={tab.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border border-[#f97316] py-2.5 text-[11px] font-medium',
+                    'active:scale-[0.97] transition-transform duration-150',
+                    'text-navy-text',
+                    active && 'text-white',
                   )}
-                </span>
-                {tab.label}
-                {active && <span className="absolute -top-px h-0.5 w-8 rounded-full bg-primary" aria-hidden="true" />}
-              </Link>
+                >
+                  <span
+                    className={cn(
+                      'absolute inset-0 rounded-full bg-primary transition-transform duration-300 ease-out',
+                      'motion-reduce:transition-none',
+                      active
+                        ? 'scale-x-100'
+                        : 'scale-x-0 origin-right group-hover:scale-x-100',
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="relative z-10 flex flex-col items-center gap-1">
+                    <span className="relative">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    {tab.label}
+                  </span>
+                </Link>
+              ) : (
+                <Link
+                  href={tab.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
+                    active ? 'text-primary' : 'text-muted-foreground',
+                  )}
+                >
+                  <span className="relative">
+                    <Icon className="size-5" aria-hidden="true" />
+                    {tab.href === '/shop' && count > 0 && (
+                      <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
+                        {count}
+                      </span>
+                    )}
+                  </span>
+                  {tab.label}
+                  {active && <span className="absolute -top-px h-0.5 w-8 rounded-full bg-primary" aria-hidden="true" />}
+                </Link>
+              )}
             </li>
           )
         })}
