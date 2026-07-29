@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, Home, Info, Users, Briefcase, Images, Lightbulb, Calendar, GraduationCap, BookOpen, ShoppingBag, Store, ChevronRight, ChevronDown, Sun, Moon, Search, Bell } from 'lucide-react'
 import { AcesLogo, AcesMark } from '@/components/aces-logo'
 import { useTheme } from 'next-themes'
@@ -33,7 +34,7 @@ export function AppHeader({ title }: { title?: string }) {
   const [showMore, setShowMore] = useState(false)
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   useEffect(() => { setMounted(true) }, [])
   const { setOpen: setSearchOpen } = useSearch()
   const { unreadCount } = useNotifications()
@@ -86,6 +87,29 @@ export function AppHeader({ title }: { title?: string }) {
           </Link>
           <Button
             type="button"
+            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            aria-label={mounted ? `Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
+            variant="secondary"
+            size="icon"
+            className="rounded-full border-none hover:bg-accent"
+          >
+            <AnimatePresence mode="wait">
+              {mounted && (
+                <motion.span
+                  key={resolvedTheme}
+                  initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                  exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center justify-center"
+                >
+                  {resolvedTheme === 'light' ? <Moon className="size-5" aria-hidden="true" /> : <Sun className="size-5" aria-hidden="true" />}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Button>
+          <Button
+            type="button"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
@@ -123,16 +147,6 @@ export function AppHeader({ title }: { title?: string }) {
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
             <AcesLogo />
             <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-                aria-label={mounted ? `Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
-                variant="secondary"
-                size="icon"
-                className="rounded-full border-none hover:bg-accent"
-              >
-                {mounted ? (resolvedTheme === 'light' ? <Moon className="size-5" aria-hidden="true" /> : <Sun className="size-5" aria-hidden="true" />) : <div className="size-5" />}
-              </Button>
               <Button
                 type="button"
                 onClick={() => setOpen(false)}
