@@ -35,7 +35,6 @@ export function BottomNav() {
           const isMarketplace = tab.href === '/marketplace'
           return (
             <li key={tab.href} className="flex-1">
-<<<<<<< HEAD
               {isMarketplace ? (
                 <Link
                   href={tab.href}
@@ -74,9 +73,9 @@ export function BottomNav() {
                   )}
                 >
                   <span className="relative">
-                    <Icon className="size-5" aria-hidden="true" />
+                    <Icon className="size-5 relative z-10" aria-hidden="true" />
                     {tab.href === '/shop' && count > 0 && (
-                      <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
+                      <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground z-20">
                         {count}
                       </span>
                     )}
@@ -85,38 +84,6 @@ export function BottomNav() {
                   {active && <span className="absolute -top-px h-0.5 w-8 rounded-full bg-primary" aria-hidden="true" />}
                 </Link>
               )}
-=======
-              <Link
-                href={tab.href}
-                aria-current={active ? 'page' : undefined}
-                className={cn(
-                  'relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
-                  active ? 'text-primary' : 'text-muted-foreground',
-                )}
-              >
-                <span className="relative">
-                  {tab.href === '/marketplace' && active && (
-                    <span className="absolute -inset-y-2 -inset-x-3 rounded-2xl border-2 animate-circle-glow" aria-hidden="true" />
-                  )}
-                  <Icon className="size-5 relative z-10" aria-hidden="true" />
-                  {tab.href === '/shop' && count > 0 && (
-                    <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground z-20">
-                      {count}
-                    </span>
-                  )}
-                  {tab.href === '/marketplace' && !active && (
-                    <span className="absolute -right-1.5 -top-1.5 flex size-2.5 z-20">
-                      <span className="absolute inset-0 rounded-full bg-indigo-500 animate-attention-pulse" />
-                      <span className="absolute inset-0 rounded-full animate-dot-hue" />
-                    </span>
-                  )}
-                </span>
-                {tab.label}
-                {active && tab.href !== '/marketplace' && (
-                  <span className="absolute -top-px h-0.5 w-8 rounded-full bg-primary" aria-hidden="true" />
-                )}
-              </Link>
->>>>>>> 167f702 (multi-color animated effects: hero gradient, card border glow, rainbow skeleton, input focus ring, header link glow, loading page border, marketplace Accept header fix, fixed logo watermark)
             </li>
           )
         })}

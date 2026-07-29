@@ -109,26 +109,26 @@ export default function ProfilePage() {
             <div>
               <h1 className="font-heading text-lg font-bold">{user!.name}</h1>
               <p className="text-xs text-navy-foreground/70">{user!.email}</p>
-              <span className="mt-1.5 inline-block rounded-full bg-primary/25 px-2.5 py-0.5 text-[10px] font-bold text-secondary">
+              <span className="mt-1.5 inline-block rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-bold text-white">
                 ACES Member
               </span>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-3 gap-2">
             <div className="flex flex-col items-center rounded-2xl bg-navy-foreground/10 py-3">
-              <Download className="size-4 text-secondary" aria-hidden="true" />
-              <span className="mt-1 font-heading text-base font-bold">{downloads}</span>
-              <span className="text-[10px] text-navy-foreground/70">Downloads</span>
+              <Download className="size-4 text-blue-200" aria-hidden="true" />
+              <span className="mt-1 font-heading text-base font-bold text-white">{downloads}</span>
+              <span className="text-[10px] text-slate-200">Downloads</span>
             </div>
             <div className="flex flex-col items-center rounded-2xl bg-navy-foreground/10 py-3">
-              <Bell className="size-4 text-secondary" aria-hidden="true" />
-              <span className="mt-1 font-heading text-base font-bold">{unreadCount}</span>
-              <span className="text-[10px] text-navy-foreground/70">Unread</span>
+              <Bell className="size-4 text-blue-200" aria-hidden="true" />
+              <span className="mt-1 font-heading text-base font-bold text-white">{unreadCount}</span>
+              <span className="text-[10px] text-slate-200">Unread</span>
             </div>
             <div className="flex flex-col items-center rounded-2xl bg-navy-foreground/10 py-3">
-              <GraduationCap className="size-4 text-secondary" aria-hidden="true" />
-              <span className="mt-1 font-heading text-base font-bold">{registeredCount + clubCount}</span>
-              <span className="text-[10px] text-navy-foreground/70">Activities</span>
+              <GraduationCap className="size-4 text-blue-200" aria-hidden="true" />
+              <span className="mt-1 font-heading text-base font-bold text-white">{registeredCount + clubCount}</span>
+              <span className="text-[10px] text-slate-200">Activities</span>
             </div>
           </div>
         </div>
