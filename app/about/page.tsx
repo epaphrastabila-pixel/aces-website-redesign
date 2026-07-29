@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { ArrowRight, Shield, GraduationCap, Target, Briefcase, Repeat, Globe, Lightbulb, Users } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/fade-in'
 import { AppShell } from '@/components/app-shell'
 
@@ -84,19 +85,17 @@ export default function AboutPage() {
         <section className="px-4 pt-6">
           <div role="tablist" aria-label="About tabs" className="flex gap-2 overflow-x-auto no-scrollbar">
             {tabs.map((tab, i) => (
-              <button
+              <Button
                 key={tab}
                 role="tab"
                 aria-selected={activeTab === i}
                 onClick={() => setActiveTab(i)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${
-                  activeTab === i
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary text-secondary-foreground'
-                }`}
+                variant={activeTab === i ? 'default' : 'secondary'}
+                size="default"
+                className="shrink-0 rounded-full px-4 py-2 text-sm font-medium"
               >
                 {tab}
-              </button>
+              </Button>
             ))}
           </div>
           <div className="mt-4 rounded-2xl border border-border bg-card p-4" role="tabpanel">

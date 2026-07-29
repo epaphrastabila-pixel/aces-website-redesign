@@ -39,7 +39,7 @@ export function NotifyMeForm({ topic }: { topic: string }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your.name@st.knust.edu.gh"
-        className="w-full rounded-full border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25"
+        className="w-full rounded-full border border-input bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:ring-2 focus:ring-primary/25"
       />
       <Button
         type="submit"

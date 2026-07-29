@@ -79,7 +79,7 @@ export default function TrackOrderPage() {
             placeholder="Search by order ID or item..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-full border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="w-full rounded-full border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
           />
         </div>
       </section>

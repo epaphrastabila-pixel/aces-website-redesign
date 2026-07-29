@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { ChevronDown, Eye } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/fade-in'
 import { AppShell } from '@/components/app-shell'
 import { ExecutiveModal, type ExecutiveData } from '@/components/executives/executive-modal'
@@ -36,24 +37,6 @@ const executivesByYear: Record<string, ExecInfo[]> = {
     exe('Jedidiah Koomson', 'PRO', 'Year 3', 'Computer Engineering', '', '', '/images/executives/2025-26/pro.png'),
     exe('Jeslove Serwaa Bekoe', "Women's Commissioner", 'Year 3', 'Computer Engineering', '', '', '/images/executives/2025-26/womens-commissioner.png'),
   ],
-  '2024/25': [
-    exe('Joseph Baidoo', 'President', 'Year 4', 'Computer Engineering', 'j.baidoo@aces.edu', 'https://linkedin.com/in/josephbaidoo'),
-    exe('Mercy Frimpong', 'Vice President', 'Year 4', 'Computer Engineering', 'm.frimpong@aces.edu', 'https://linkedin.com/in/mercyfrimpong'),
-    exe('Daniel Amankwah', 'General Secretary', 'Year 3', 'Computer Engineering', 'd.amankwah@aces.edu', 'https://linkedin.com/in/danielamankwah'),
-    exe('Priscilla Sarpong', 'Financial Secretary', 'Year 4', 'Computer Engineering', 'p.sarpong@aces.edu', 'https://linkedin.com/in/priscillasarpong'),
-    exe('Emmanuel Owusu', 'Organizing Secretary', 'Year 3', 'Computer Engineering', 'e.owusu@aces.edu', 'https://linkedin.com/in/emmanuelowusu'),
-    exe('Rita Tetteh', 'PRO', 'Year 3', 'Computer Engineering', 'r.tetteh@aces.edu', 'https://linkedin.com/in/ritatetteh'),
-    exe('Sarah Boakye', "Women's Commissioner", 'Year 4', 'Computer Engineering', 's.boakye@aces.edu', 'https://linkedin.com/in/sarahboakye'),
-  ],
-  '2023/24': [
-    exe('Francis Ofori', 'President', 'Year 4', 'Computer Engineering', 'f.ofori@aces.edu', 'https://linkedin.com/in/francisofori'),
-    exe('Gifty Nkrumah', 'Vice President', 'Year 4', 'Computer Engineering', 'g.nkrumah@aces.edu', 'https://linkedin.com/in/giftynkrumah'),
-    exe('Bernard Anim', 'General Secretary', 'Year 3', 'Computer Engineering', 'b.anim@aces.edu', 'https://linkedin.com/in/bernardanim'),
-    exe('Linda Twumasi', 'Financial Secretary', 'Year 4', 'Computer Engineering', 'l.twumasi@aces.edu', 'https://linkedin.com/in/lindatwumasi'),
-    exe('Samuel Mensah', 'Organizing Secretary', 'Year 3', 'Computer Engineering', 's.mensah@aces.edu', 'https://linkedin.com/in/samuelmensah'),
-    exe('Comfort Asare', 'PRO', 'Year 3', 'Computer Engineering', 'c.asare@aces.edu', 'https://linkedin.com/in/comfortasare'),
-    exe('Vera Darko', "Women's Commissioner", 'Year 4', 'Computer Engineering', 'v.darko@aces.edu', 'https://linkedin.com/in/veradarko'),
-  ],
 }
 
 const years = Object.keys(executivesByYear)
@@ -66,7 +49,6 @@ export default function ExecutivesPage() {
 
   return (
     <AppShell title="Executives">
-      {/* Hero image */}
       <FadeIn>
         <section className="px-4 pt-5">
           <div className="relative h-48 overflow-hidden rounded-3xl">
@@ -89,7 +71,6 @@ export default function ExecutivesPage() {
         </section>
       </FadeIn>
 
-      {/* Intro text */}
       <FadeIn delay={50}>
         <section className="px-4 pt-6">
           <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
@@ -100,7 +81,6 @@ export default function ExecutivesPage() {
         </section>
       </FadeIn>
 
-      {/* Year selector */}
       <FadeIn delay={100}>
         <section className="px-4 pt-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Academic year</p>
@@ -136,21 +116,18 @@ export default function ExecutivesPage() {
         </section>
       </FadeIn>
 
-      {/* Executives grid */}
-      <section className="px-4 pt-6 pb-8">
-        <FadeIn delay={150}>
+      <FadeIn delay={150}>
+        <section className="px-4 pt-6 pb-8">
           <h2 className="font-heading text-lg font-bold text-foreground">Your {selectedYear} executives</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             Elected by you, working for you. Tap &ldquo;View Profile&rdquo; to reach out.
           </p>
-        </FadeIn>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {executives.map((exec, i) => (
-            <FadeIn key={exec.name} delay={200 + i * 50}>
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            {executives.map((exec, i) => (
               <div
-                className="flex flex-col items-center rounded-2xl border border-border bg-card p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                key={exec.name}
+                className="flex flex-col items-center rounded-2xl border border-border bg-card p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5"
               >
-                {/* Photo */}
                 <div className="relative size-16 overflow-hidden rounded-full border-2 border-border">
                   <Image
                     src={exec.photo}
@@ -166,21 +143,21 @@ export default function ExecutivesPage() {
                 <p className="mt-0.5 text-[10px] text-muted-foreground">
                   {exec.year} &middot; {exec.department}
                 </p>
-                <button
-                  type="button"
+                <Button
+                  size="sm"
+                  variant="secondary"
                   onClick={() => setProfile(exec)}
-                  className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-secondary px-4 py-2 text-[11px] font-semibold text-foreground transition-all duration-200 hover:bg-accent active:scale-[0.97]"
+                  className="mt-3 text-[11px]"
                 >
                   <Eye className="size-3.5" aria-hidden="true" />
                   View Profile
-                </button>
+                </Button>
               </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      </FadeIn>
 
-      {/* Profile modal */}
       <ExecutiveModal exec={profile} open={profile !== null} onClose={() => setProfile(null)} />
     </AppShell>
   )

@@ -146,7 +146,7 @@ export default function HelpPage() {
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
             placeholder="Tell us how we can improve the app…"
-            className="w-full resize-none rounded-2xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+            className="w-full resize-none rounded-2xl border border-border bg-card px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground input-focus-cycle focus:border-primary"
           />
           <Button
             type="submit"

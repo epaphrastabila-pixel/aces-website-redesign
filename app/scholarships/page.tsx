@@ -67,7 +67,7 @@ function DeadlineBadge({ daysLeft }: { daysLeft: number }) {
 
 function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; applied: boolean }) {
   return (
-    <li className="rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+    <li className="rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
       <div className="flex items-start justify-between gap-3">
         <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
           <GraduationCap className="size-5" aria-hidden="true" />

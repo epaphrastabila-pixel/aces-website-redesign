@@ -212,7 +212,7 @@ export default function EventsPage() {
           const registered = isRegistered(event.name)
           const left = Math.max(0, event.capacity - event.registered - (registered ? 1 : 0))
           return (
-            <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+            <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
               <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                 <Image
                   src={event.image}

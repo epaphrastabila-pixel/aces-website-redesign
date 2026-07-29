@@ -29,7 +29,7 @@ export function CourseFilterBar({ year, semester, search, theme, onYearChange, o
           placeholder="Search by course code or title…"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full rounded-2xl border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+          className="w-full rounded-2xl border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
         />
       </div>
 

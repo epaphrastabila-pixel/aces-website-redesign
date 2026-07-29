@@ -140,7 +140,7 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
                   required
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
+                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none input-focus-cycle focus:border-primary"
                 >
                   <option value="">Select your year</option>
                   <option value="1">Year 1</option>
@@ -160,7 +160,7 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
                   placeholder="e.g. embedded systems, AI, web dev"
                   value={interests}
                   onChange={(e) => setInterests(e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground input-focus-cycle focus:border-primary"
                 />
               </div>
               <div>
@@ -174,7 +174,7 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
                   placeholder="Tell us what you hope to learn or contribute..."
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  className="mt-1.5 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                  className="mt-1.5 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground input-focus-cycle focus:border-primary"
                 />
               </div>
               <Button
@@ -240,7 +240,8 @@ export default function HomePage() {
             sizes="(max-width: 448px) 100vw, 448px"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" aria-hidden="true" />
+          <div className="absolute inset-0 animate-hero-shift opacity-80" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" aria-hidden="true" />
           <div className="absolute bottom-0 left-0 right-0 p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/90 drop-shadow-sm">Akwaaba, welcome back</p>
             <h1 className="mt-1 font-heading text-2xl font-bold leading-tight text-balance text-white drop-shadow-sm">
@@ -272,7 +273,7 @@ export default function HomePage() {
               <Link
                 key={action.href}
                 href={action.href}
-                className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5"
               >
                 <span className="flex size-10 items-center justify-center rounded-xl bg-secondary text-primary">
                   <Icon className="size-5" aria-hidden="true" />
@@ -326,7 +327,7 @@ export default function HomePage() {
             const left = Math.max(0, event.capacity - event.registered - (regd ? 1 : 0))
             const hasRegLink = 'regLink' in event
             return (
-              <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image src={event.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   <span className="absolute left-2 top-2 rounded-full bg-black/30 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
@@ -391,7 +392,7 @@ export default function HomePage() {
             const member = isMember(club.name)
             const spots = club.capacity - club.members - (member ? 1 : 0)
             return (
-              <div key={club.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <div key={club.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image src={club.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   {member && (

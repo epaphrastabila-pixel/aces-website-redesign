@@ -176,7 +176,7 @@ export function AppHeader({ title }: { title?: string }) {
                       onClick={() => setOpen(false)}
                       className={cn(
                         'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors',
-                        active ? 'bg-secondary text-primary' : 'text-foreground hover:bg-muted',
+                        active ? 'bg-secondary text-primary header-link-glow' : 'text-foreground hover:bg-muted',
                       )}
                     >
                       <span className="flex size-9 items-center justify-center rounded-lg bg-secondary text-primary">
@@ -219,7 +219,7 @@ export function AppHeader({ title }: { title?: string }) {
                           onClick={() => setOpen(false)}
                           className={cn(
                             'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
-                            active ? 'bg-secondary text-primary' : 'text-foreground hover:bg-muted',
+                            active ? 'bg-secondary text-primary header-link-glow' : 'text-foreground hover:bg-muted',
                           )}
                         >
                           <span className="flex size-8 items-center justify-center rounded-lg bg-secondary text-primary">

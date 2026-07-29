@@ -74,7 +74,7 @@ export default function AccountSettingsPage() {
             type="text"
             value={settings.displayName}
             onChange={(e) => setSettings((p) => ({ ...p, displayName: e.target.value }))}
-            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
+            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none input-focus-cycle focus:border-primary"
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function AccountSettingsPage() {
             id="year"
             value={settings.year}
             onChange={(e) => setSettings((p) => ({ ...p, year: e.target.value }))}
-            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
+            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none input-focus-cycle focus:border-primary"
           >
             <option value="1">Year 1</option>
             <option value="2">Year 2</option>

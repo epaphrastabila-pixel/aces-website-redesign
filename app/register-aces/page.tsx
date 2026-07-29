@@ -92,7 +92,7 @@ function RegisterForm() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Kwame Asante"
             autoComplete="name"
-            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
           />
         </div>
 
@@ -107,7 +107,7 @@ function RegisterForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="kwame@st.knust.edu.gh"
             autoComplete="email"
-            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
           />
         </div>
 
@@ -123,7 +123,7 @@ function RegisterForm() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="At least 6 characters"
               autoComplete="new-password"
-              className="w-full rounded-xl border border-border bg-secondary px-4 py-3 pr-11 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+              className="w-full rounded-xl border border-border bg-secondary px-4 py-3 pr-11 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
             />
             <Button
               type="button"
@@ -149,7 +149,7 @@ function RegisterForm() {
             onChange={(e) => setConfirm(e.target.value)}
             placeholder="Repeat your password"
             autoComplete="new-password"
-            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
           />
         </div>
 

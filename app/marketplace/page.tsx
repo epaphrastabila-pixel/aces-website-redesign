@@ -5,8 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Search, X, Store, Phone, Package } from 'lucide-react'
-import { FadeIn } from '@/components/fade-in'
 import { AppShell } from '@/components/app-shell'
+import { FadeIn } from '@/components/fade-in'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ProductCardSkeleton } from '@/components/skeleton'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -29,7 +30,7 @@ type Product = {
 
 const categoryEmoji: Record<string, string> = {
   'Food & Beverages': '🍔',
-  'Fashion & Apparel': '👕',
+  'Fashion & Apparel': '👒',
   'Technology & Electronics': '💻',
   'Services (Design, Tutoring, etc)': '🔧',
   'Beauty & Cosmetics': '✨',
@@ -39,7 +40,7 @@ const categoryEmoji: Record<string, string> = {
 const CATEGORIES = [
   { key: 'all', label: 'All', emoji: '🔥' },
   { key: 'Food & Beverages', label: 'Food & Beverages', emoji: '🍔' },
-  { key: 'Fashion & Apparel', label: 'Fashion & Apparel', emoji: '👕' },
+  { key: 'Fashion & Apparel', label: 'Fashion & Apparel', emoji: '👒' },
   { key: 'Technology & Electronics', label: 'Technology & Electronics', emoji: '💻' },
   { key: 'Services (Design, Tutoring, etc)', label: 'Services', emoji: '🔧' },
   { key: 'Beauty & Cosmetics', label: 'Beauty & Cosmetics', emoji: '✨' },
@@ -68,12 +69,17 @@ export default function MarketplacePage() {
   const [selected, setSelected] = useState<Product | null>(null)
 
   useEffect(() => {
-    fetch(API)
+    fetch(API, { headers: { Accept: 'application/json' } })
       .then((r) => {
         if (!r.ok) throw new Error('Failed to load marketplace')
+        const ct = r.headers.get('content-type') || ''
+        if (!ct.includes('application/json')) throw new Error('Unexpected response from server')
         return r.json()
       })
-      .then(setProducts)
+      .then((data) => {
+        if (!Array.isArray(data)) throw new Error('Invalid data format')
+        setProducts(data)
+      })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false))
   }, [])
@@ -114,7 +120,7 @@ export default function MarketplacePage() {
             Discover products &amp; services from fellow KNUST students.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3 px-4 pt-4 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 px-4 pt-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
@@ -130,13 +136,13 @@ export default function MarketplacePage() {
           <Package className="size-12 text-muted-foreground/40" aria-hidden="true" />
           <h1 className="mt-4 font-heading text-lg font-bold text-foreground">Failed to load</h1>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">{error}</p>
-          <button
+          <Button
             type="button"
             onClick={() => window.location.reload()}
-            className="mt-6 rounded-2xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-all duration-200 hover:bg-primary/90 active:scale-[0.97]"
+            className="mt-6 rounded-2xl px-6 py-3 text-sm font-bold"
           >
             Try again
-          </button>
+          </Button>
         </div>
       </AppShell>
     )
@@ -165,7 +171,7 @@ export default function MarketplacePage() {
               placeholder="Search products, vendors…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-full border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+              className="w-full rounded-full border border-border bg-secondary py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
             />
           </div>
         </div>
@@ -175,21 +181,18 @@ export default function MarketplacePage() {
         <div className="overflow-x-auto no-scrollbar px-4 pt-4">
           <div className="flex gap-2" role="tablist" aria-label="Filter by category">
             {CATEGORIES.map((cat) => (
-              <button
+              <Button
                 key={cat.key}
                 role="tab"
                 aria-selected={category === cat.key}
                 onClick={() => setCategory(cat.key)}
-                className={cn(
-                  'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors',
-                  category === cat.key
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary text-secondary-foreground hover:bg-accent',
-                )}
+                variant={category === cat.key ? 'default' : 'secondary'}
+                size="default"
+                className="shrink-0 rounded-full px-4 py-2 text-xs font-semibold"
               >
                 <span className="mr-1">{cat.emoji}</span>
                 {cat.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -203,19 +206,20 @@ export default function MarketplacePage() {
         </div>
       </FadeIn>
 
-      {filtered.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 px-4 pt-3 pb-8 sm:grid-cols-3">
-          {filtered.map((product, i) => (
-            <FadeIn key={product.id} delay={200 + i * 50}>
+      <FadeIn delay={200}>
+        {filtered.length > 0 ? (
+          <div className="grid grid-cols-2 gap-4 px-4 pt-3 pb-8">
+            {filtered.map((product, i) => (
               <article
-                className="overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                key={product.id}
+                className="overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5"
               >
                 <button
                   type="button"
                   onClick={() => setSelected(product)}
                   className="w-full text-left"
                 >
-                  <div className="relative h-44 overflow-hidden bg-muted">
+                  <div className="relative h-48 overflow-hidden bg-muted">
                     <Image
                       src={productImage(product)}
                       alt={product.name}
@@ -224,18 +228,19 @@ export default function MarketplacePage() {
                       className="object-cover transition-transform duration-300 group-hover/card:scale-105"
                       priority={i < 4}
                     />
-                    <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
-                      {categoryEmoji[product.category] || '📦'} {product.category}
+                    <span className="absolute left-2 top-2 flex max-w-[calc(100%-16px)] items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
+                      <span className="shrink-0">{categoryEmoji[product.category] || '📦'}</span>
+                      <span className="truncate">{product.category}</span>
                     </span>
                   </div>
-                  <div className="p-4">
+                  <div className="p-5">
                     <div className="flex items-start justify-between gap-2">
-                      <h3 className="text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
+                      <h3 className="min-w-0 flex-1 text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
                       <span className="shrink-0 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
                         GH₵ {product.price}
                       </span>
                     </div>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground line-clamp-2">{product.description}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">{product.description}</p>
                     <div className="my-3 border-t border-border" />
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
@@ -255,18 +260,16 @@ export default function MarketplacePage() {
                   </div>
                 </button>
               </article>
-            </FadeIn>
-          ))}
-        </div>
-      ) : (
-        <FadeIn delay={200}>
+            ))}
+          </div>
+        ) : (
           <div className="flex flex-col items-center px-4 py-16 text-center">
             <Package className="size-10 text-muted-foreground/40" aria-hidden="true" />
             <p className="mt-3 text-sm font-medium text-foreground">No products found</p>
             <p className="mt-1 text-xs text-muted-foreground">Try adjusting your search or category filter.</p>
           </div>
-        </FadeIn>
-      )}
+        )}
+      </FadeIn>
 
       <AnimatePresence>
         {selected && (
@@ -286,14 +289,16 @@ export default function MarketplacePage() {
               onClick={(e) => e.stopPropagation()}
               className="relative mx-auto w-full max-w-md rounded-t-3xl bg-background pb-8"
             >
-              <button
+              <Button
                 type="button"
                 onClick={() => setSelected(null)}
                 aria-label="Close"
-                className="absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur"
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-4 z-10 rounded-full bg-background/80 text-foreground backdrop-blur"
               >
-                <X className="size-4" />
-              </button>
+                <X className="size-4" aria-hidden="true" />
+              </Button>
 
               <div className="relative aspect-square overflow-hidden rounded-t-3xl bg-muted">
                 <Image

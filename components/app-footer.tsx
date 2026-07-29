@@ -108,7 +108,7 @@ export function AppFooter() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="min-w-0 flex-1 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs text-navy-foreground placeholder:text-navy-foreground/40 outline-none focus:border-primary"
+              className="min-w-0 flex-1 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs text-navy-foreground placeholder:text-navy-foreground/40 outline-none input-focus-cycle focus:border-primary"
             />
             <Button
               type="submit"

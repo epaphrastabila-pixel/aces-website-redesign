@@ -124,7 +124,7 @@ function Button({
           'transition-all duration-200 ease-out',
           'hover:-translate-y-0.5 hover:scale-[1.02]',
           'active:scale-[0.97]',
-          variant === 'default' && 'hover:shadow-lg hover:shadow-primary/25',
+          variant === 'default' && 'hover:shadow-lg button-glow-hover',
           variant === 'outline' && 'hover:shadow-md',
           iconType === 'arrow' && 'group-hover/button:[&_svg]:translate-x-1',
           iconType === 'download' && 'group-hover/button:[&_svg]:translate-y-0.5',
@@ -146,7 +146,10 @@ function Button({
     >
       {sweepEnabled && (
         <span
-          className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/[0.12] to-transparent translate-x-[-100%] transition-transform duration-700 ease-in-out group-hover/button:translate-x-[100%]"
+          className="pointer-events-none absolute inset-0 rounded-lg translate-x-[-100%] transition-transform duration-700 ease-in-out group-hover/button:translate-x-[100%]"
+          style={{
+            background: 'linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.35) 20%, rgba(139,92,246,0.35) 45%, rgba(236,72,153,0.35) 70%, rgba(6,182,212,0.35) 90%, transparent 100%)',
+          }}
           aria-hidden="true"
         />
       )}
@@ -154,10 +157,18 @@ function Button({
       {animEnabled && ripples.map((r) => (
         <motion.span
           key={r.id}
-          className="pointer-events-none absolute rounded-full bg-white/25"
-          style={{ left: r.x, top: r.y, width: 20, height: 20, marginLeft: -10, marginTop: -10 }}
-          initial={{ scale: 0, opacity: 0.4 }}
-          animate={{ scale: 4, opacity: 0 }}
+          className="pointer-events-none absolute rounded-full"
+          style={{
+            left: r.x,
+            top: r.y,
+            width: 40,
+            height: 40,
+            marginLeft: -20,
+            marginTop: -20,
+            background: 'radial-gradient(circle, rgba(99,102,241,0.7) 0%, rgba(139,92,246,0.5) 30%, rgba(236,72,153,0.3) 55%, rgba(6,182,212,0.15) 80%, transparent 100%)',
+          }}
+          initial={{ scale: 0, opacity: 0.6 }}
+          animate={{ scale: 3, opacity: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         />
       ))}

@@ -2,12 +2,46 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { PartyPopper, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { AppHeader } from '@/components/app-header'
 import { AppFooter } from '@/components/app-footer'
 import { Button } from '@/components/ui/button'
 import { BottomNav } from '@/components/bottom-nav'
 import { useCart } from '@/lib/cart-context'
+
+function NavigationLoadingBar() {
+  const pathname = usePathname()
+  const [loading, setLoading] = useState(false)
+  const prevPathname = useRef(pathname)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  useEffect(() => {
+    if (prevPathname.current !== pathname) {
+      prevPathname.current = pathname
+      setLoading(false)
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const link = (e.target as HTMLElement).closest('a')
+      if (!link) return
+      if (!link.href || !link.href.startsWith(window.location.origin + '/')) return
+      if (link.target === '_blank') return
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return
+      clearTimeout(timeoutRef.current)
+      setLoading(true)
+      timeoutRef.current = setTimeout(() => setLoading(false), 8000)
+    }
+    document.addEventListener('click', handler)
+    return () => document.removeEventListener('click', handler)
+  }, [])
+
+  if (!loading) return null
+  return <div className="loading-border-active" />
+}
 
 function CartToast() {
   const { toast, dismissToast } = useCart()
@@ -43,12 +77,14 @@ export function AppShell({
   title?: string
 }) {
   return (
-    <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col bg-background shadow-[0_0_40px_rgba(11,31,58,0.08)] max-sm:shadow-none">
+    <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col bg-background shadow-[0_0_40px rgba(11,31,58,0.08)] max-sm:shadow-none">
+      <NavigationLoadingBar />
       <Image
         src="/images/aceslogo.png"
         alt=""
-        fill
-        className="pointer-events-none select-none object-contain p-12 opacity-[0.04]"
+        width={400}
+        height={400}
+        className="pointer-events-none select-none fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.12]"
         aria-hidden="true"
         priority
       />

@@ -120,7 +120,7 @@ export default function CartPage() {
                 value={address.name}
                 onChange={(e) => setAddress({ ...address, name: e.target.value })}
                 placeholder="Your name"
-                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
               />
             </div>
             <div>
@@ -134,7 +134,7 @@ export default function CartPage() {
                 value={address.phone}
                 onChange={(e) => setAddress({ ...address, phone: e.target.value })}
                 placeholder="+233 50 000 0000"
-                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
               />
             </div>
             <div>
@@ -147,7 +147,7 @@ export default function CartPage() {
                 value={address.studentId}
                 onChange={(e) => setAddress({ ...address, studentId: e.target.value })}
                 placeholder="e.g. 2123456789"
-                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
               />
             </div>
             {fulfillment === 'delivery' && (
@@ -162,7 +162,7 @@ export default function CartPage() {
                     value={address.hall}
                     onChange={(e) => setAddress({ ...address, hall: e.target.value })}
                     placeholder="e.g. Independence Hall"
-                    className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                    className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
                   />
                 </div>
                 <div>
@@ -175,7 +175,7 @@ export default function CartPage() {
                     value={address.room}
                     onChange={(e) => setAddress({ ...address, room: e.target.value })}
                     placeholder="e.g. B12"
-                    className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                    className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
                   />
                 </div>
               </>
@@ -190,7 +190,7 @@ export default function CartPage() {
                 value={address.notes}
                 onChange={(e) => setAddress({ ...address, notes: e.target.value })}
                 placeholder="Anything we should know?"
-                className="mt-1.5 w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary"
+                className="mt-1.5 w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none input-focus-cycle focus:border-primary"
               />
             </div>
             <div className="rounded-xl bg-secondary/60 p-3 text-sm">
@@ -427,7 +427,7 @@ export default function CartPage() {
                         }
                       }}
                       placeholder="Coupon code"
-                      className="w-full rounded-xl border border-border bg-card py-2.5 pl-9 pr-3 text-sm outline-none focus:border-primary"
+                      className="w-full rounded-xl border border-border bg-card py-2.5 pl-9 pr-3 text-sm outline-none input-focus-cycle focus:border-primary"
                     />
                   </div>
                   <Button

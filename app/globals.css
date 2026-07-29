@@ -170,3 +170,136 @@
 .toggle-ring:focus-visible {
   @apply ring-2 ring-primary/50 ring-offset-1;
 }
+
+/* Multi-color button glow */
+@keyframes button-glow-pulse {
+  0%, 100% { box-shadow: 0 8px 28px -4px rgba(99,102,241,0.45), 0 0 20px -4px rgba(139,92,246,0.25); }
+  33% { box-shadow: 0 8px 28px -4px rgba(139,92,246,0.45), 0 0 20px -4px rgba(236,72,153,0.25); }
+  66% { box-shadow: 0 8px 28px -4px rgba(236,72,153,0.45), 0 0 20px -4px rgba(6,182,212,0.25); }
+}
+
+.button-glow-hover:hover {
+  animation: button-glow-pulse 3s ease-in-out infinite;
+}
+
+/* Marketplace nav attention dot */
+@keyframes attention-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.5), 0 0 0 0 rgba(99,102,241,0.2); }
+  25% { box-shadow: 0 0 0 6px rgba(139,92,246,0.3), 0 0 0 12px rgba(139,92,246,0.1); }
+  50% { box-shadow: 0 0 0 6px rgba(236,72,153,0.3), 0 0 0 12px rgba(236,72,153,0.1); }
+  75% { box-shadow: 0 0 0 6px rgba(6,182,212,0.3), 0 0 0 12px rgba(6,182,212,0.1); }
+}
+
+.animate-attention-pulse {
+  animation: attention-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dot-hue {
+  0%, 100% { background-color: #6366f1; }
+  25% { background-color: #8b5cf6; }
+  50% { background-color: #ec4899; }
+  75% { background-color: #06b6d4; }
+}
+
+.animate-dot-hue {
+  animation: dot-hue 4s ease-in-out infinite;
+}
+
+/* Multi-color gradient active indicator */
+@keyframes indicator-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-indicator-flow {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #06b6d4, #6366f1);
+  background-size: 300% 100%;
+  animation: indicator-flow 3s ease-in-out infinite;
+}
+
+/* Marketplace active circle glow */
+@keyframes circle-glow {
+  0%, 100% { box-shadow: 0 0 12px 2px rgba(99,102,241,0.4); border-color: #6366f1; }
+  25% { box-shadow: 0 0 16px 4px rgba(139,92,246,0.4); border-color: #8b5cf6; }
+  50% { box-shadow: 0 0 12px 2px rgba(236,72,153,0.4); border-color: #ec4899; }
+  75% { box-shadow: 0 0 16px 4px rgba(6,182,212,0.4); border-color: #06b6d4; }
+}
+
+.animate-circle-glow {
+  animation: circle-glow 3s ease-in-out infinite;
+}
+
+/* 1. Hero gradient shift */
+@keyframes hero-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-hero-shift {
+  background: linear-gradient(135deg, #0b1f3a, #1a0a3e, #1a0a3e, #0b1f3a);
+  background-size: 400% 400%;
+  animation: hero-shift 8s ease-in-out infinite;
+}
+
+/* 2. Card hover border glow */
+@keyframes card-border-glow {
+  0%, 100% { border-color: rgba(99,102,241,0.4); }
+  33% { border-color: rgba(139,92,246,0.4); }
+  66% { border-color: rgba(236,72,153,0.4); }
+}
+
+.card-border-glow:hover {
+  animation: card-border-glow 3s ease-in-out infinite;
+}
+
+/* 3. Rainbow skeleton shimmer */
+@keyframes skeleton-rainbow {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-skeleton-rainbow {
+  background: linear-gradient(90deg, #e2eaf4, #c7d2fe, #ddd6fe, #fce7f3, #cffafe, #e2eaf4);
+  background-size: 400% 100%;
+  animation: skeleton-rainbow 2s ease-in-out infinite;
+}
+
+/* 4. Input focus ring cycle */
+@keyframes focus-ring-cycle {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(99,102,241,0.4), 0 0 0 4px rgba(99,102,241,0.1); }
+  33% { box-shadow: 0 0 0 2px rgba(139,92,246,0.4), 0 0 0 4px rgba(139,92,246,0.1); }
+  66% { box-shadow: 0 0 0 2px rgba(236,72,153,0.4), 0 0 0 4px rgba(236,72,153,0.1); }
+}
+
+.input-focus-cycle:focus {
+  animation: focus-ring-cycle 3s ease-in-out infinite;
+  outline: none;
+}
+
+/* 5. Loading border (circles the whole page) */
+@keyframes loading-border-glow {
+  0%, 100% { box-shadow: inset 0 0 0 8px #6366f1, 0 0 24px 4px rgba(99,102,241,0.3); }
+  25% { box-shadow: inset 0 0 0 8px #8b5cf6, 0 0 24px 4px rgba(139,92,246,0.3); }
+  50% { box-shadow: inset 0 0 0 8px #ec4899, 0 0 24px 4px rgba(236,72,153,0.3); }
+  75% { box-shadow: inset 0 0 0 8px #06b6d4, 0 0 24px 4px rgba(6,182,212,0.3); }
+}
+
+.loading-border-active {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  animation: loading-border-glow 2s ease-in-out infinite;
+}
+
+/* 6. Header active link glow */
+@keyframes header-link-glow {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(99,102,241,0.2); }
+  33% { box-shadow: inset 0 0 0 1px rgba(139,92,246,0.2); }
+  66% { box-shadow: inset 0 0 0 1px rgba(236,72,153,0.2); }
+}
+
+.header-link-glow {
+  animation: header-link-glow 3s ease-in-out infinite;
+}
