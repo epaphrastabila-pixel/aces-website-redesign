@@ -2,8 +2,9 @@
 
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
-import { ChevronRight, Save, User } from 'lucide-react'
+import { ChevronRight, Save, User, Palette } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import ThemeToggle2 from '@/components/ui/theme-toggle'
 import { AppShell } from '@/components/app-shell'
 
 const STORAGE_KEY = 'aces_account_settings'
@@ -120,6 +121,21 @@ export default function AccountSettingsPage() {
           Save changes
         </Button>
       </form>
+
+      <section className="border-t border-border px-4 pt-6 pb-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex size-10 items-center justify-center rounded-full bg-secondary text-primary">
+              <Palette className="size-5" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Appearance</p>
+              <p className="text-xs text-muted-foreground">Switch between light and dark mode</p>
+            </div>
+          </div>
+          <ThemeToggle2 />
+        </div>
+      </section>
     </AppShell>
   )
 }

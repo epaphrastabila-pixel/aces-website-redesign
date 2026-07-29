@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Menu, X, Home, Info, Users, Briefcase, Images, Lightbulb, Calendar, GraduationCap, BookOpen, ShoppingBag, Store, ChevronRight, ChevronDown, Sun, Moon, Search, Bell } from 'lucide-react'
 import { AcesLogo, AcesMark } from '@/components/aces-logo'
-import { useTheme } from '@/components/theme-provider'
+import { useTheme } from 'next-themes'
 import { useSearch } from '@/lib/search-context'
 import { useNotifications } from '@/lib/notification-context'
 import { Button } from '@/components/ui/button'
@@ -32,7 +32,9 @@ export function AppHeader({ title }: { title?: string }) {
   const [open, setOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const pathname = usePathname()
-  const { theme, mounted, toggle } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  useEffect(() => { setMounted(true) }, [])
   const { setOpen: setSearchOpen } = useSearch()
   const { unreadCount } = useNotifications()
 
@@ -123,13 +125,13 @@ export function AppHeader({ title }: { title?: string }) {
             <div className="flex items-center gap-2">
               <Button
                 type="button"
-                onClick={toggle}
-                aria-label={mounted ? `Switch to ${theme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                aria-label={mounted ? `Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
                 variant="secondary"
                 size="icon"
                 className="rounded-full border-none hover:bg-accent"
               >
-                {mounted ? (theme === 'light' ? <Moon className="size-5" aria-hidden="true" /> : <Sun className="size-5" aria-hidden="true" />) : <div className="size-5" />}
+                {mounted ? (resolvedTheme === 'light' ? <Moon className="size-5" aria-hidden="true" /> : <Sun className="size-5" aria-hidden="true" />) : <div className="size-5" />}
               </Button>
               <Button
                 type="button"
