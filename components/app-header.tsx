@@ -32,12 +32,17 @@ const secondaryLinks = [
 export function AppHeader({ title }: { title?: string }) {
   const [open, setOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
+  const [hydrated, setHydrated] = useState(false)
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
   const { setTheme, resolvedTheme } = useTheme()
   useEffect(() => { setMounted(true) }, [])
   const { setOpen: setSearchOpen } = useSearch()
   const { unreadCount } = useNotifications()
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
 
   useEffect(() => {
     setOpen(false)
@@ -75,11 +80,11 @@ export function AppHeader({ title }: { title?: string }) {
           </Button>
           <Link
             href="/notifications"
-            aria-label={`Notifications, ${unreadCount} unread`}
+            aria-label={`Notifications, ${hydrated ? unreadCount : 0} unread`}
             className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary"
           >
             <Bell className="size-5" aria-hidden="true" />
-            {unreadCount > 0 && (
+            {hydrated && unreadCount > 0 && (
               <span className="absolute right-1.5 top-1.5 flex size-4 items-center justify-center rounded-full bg-destructive text-[9px] font-bold text-destructive-foreground">
                 {unreadCount > 9 ? '9+' : unreadCount}
               </span>

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { PartyPopper, X } from 'lucide-react'
 import { AppHeader } from '@/components/app-header'
@@ -42,9 +43,17 @@ export function AppShell({
   title?: string
 }) {
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col bg-background shadow-[0_0_40px_rgba(11,31,58,0.08)] max-sm:shadow-none">
+    <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col bg-background shadow-[0_0_40px_rgba(11,31,58,0.08)] max-sm:shadow-none">
+      <Image
+        src="/images/aceslogo.png"
+        alt=""
+        fill
+        className="pointer-events-none select-none object-contain p-12 opacity-[0.04]"
+        aria-hidden="true"
+        priority
+      />
       <AppHeader title={title} />
-      <main className="flex-1 pb-24">{children}</main>
+      <main className="relative flex-1 pb-24 animate-slide-in">{children}</main>
       <AppFooter />
       <CartToast />
       <BottomNav />

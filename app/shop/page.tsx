@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Heart, ShoppingBag, Check } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
-import { Button } from '@/components/ui/button'
+import { FadeIn } from '@/components/fade-in'
 import { useCart } from '@/lib/cart-context'
 import { useWishlist } from '@/lib/wishlist-context'
 import { cn } from '@/lib/utils'
@@ -18,6 +18,7 @@ export default function ShopPage() {
 
   return (
     <AppShell title="ACES Shop">
+      <FadeIn>
       <section className="flex items-start justify-between gap-3 px-4 pt-5">
         <div>
           <h1 className="font-heading text-2xl font-bold text-navy-text text-balance">Rep the Land of ACES</h1>
@@ -47,7 +48,9 @@ export default function ShopPage() {
           </Link>
         </div>
       </section>
+      </FadeIn>
 
+      <FadeIn delay={50}>
       <section className="grid grid-cols-2 gap-3 px-4 pt-4 pb-8" aria-label="Products">
         {products.map((product) => (
           <article
@@ -68,7 +71,7 @@ export default function ShopPage() {
                     {product.tag}
                   </span>
                 )}
-                <Button
+                <button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
@@ -77,12 +80,10 @@ export default function ShopPage() {
                       : addToWishlist({ id: product.id, name: product.name, price: product.price, image: product.image || '/placeholder.svg', addedAt: new Date().toISOString() })
                   }}
                   aria-label={isWishlisted(product.id) ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-2 top-2 z-10 rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-black/50"
+                  className="absolute right-2 top-2 z-10 flex size-8 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
                 >
                   <Heart className={cn('size-4', isWishlisted(product.id) && 'fill-current')} aria-hidden="true" />
-                </Button>
+                </button>
               </div>
             </Link>
             <div className="relative flex flex-1 flex-col gap-1 p-3">
@@ -91,7 +92,7 @@ export default function ShopPage() {
               </Link>
               <div className="mt-auto flex items-center justify-between pt-2">
                 <p className="text-sm font-bold text-navy-text">GHS {product.price}</p>
-                <Button
+                <button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
@@ -100,21 +101,20 @@ export default function ShopPage() {
                     setTimeout(() => setClickedId(null), 1500)
                   }}
                   aria-label={`Add ${product.name} to bag`}
-                  variant="default"
-                  size="icon"
-                  className="z-10 rounded-full"
+                  className="z-10 flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-110 active:scale-90"
                 >
                   {clickedId === product.id ? (
-                    <Check className="size-4" aria-hidden="true" />
+                    <Check className="size-4 animate-check-bounce" aria-hidden="true" />
                   ) : (
                     <ShoppingBag className="size-4" aria-hidden="true" />
                   )}
-                </Button>
+                </button>
               </div>
             </div>
           </article>
         ))}
       </section>
+      </FadeIn>
     </AppShell>
   )
 }

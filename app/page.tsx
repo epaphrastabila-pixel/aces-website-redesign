@@ -23,6 +23,7 @@ import {
   X,
 } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { FadeIn } from '@/components/fade-in'
 import { useRegistration } from '@/lib/registration-context'
 import { useAcesAuth } from '@/lib/aces-auth-context'
 import { Button } from '@/components/ui/button'
@@ -206,6 +207,7 @@ export default function HomePage() {
   return (
     <AppShell>
       {/* CODEFEST Banner */}
+      <FadeIn>
       <section className="px-4 pt-4">
         <div className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-background border border-primary/20 p-3">
           <span className="text-lg" aria-hidden="true">🔥</span>
@@ -224,8 +226,10 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
+      </FadeIn>
 
       {/* Hero */}
+      <FadeIn delay={50}>
       <section className="px-4 pt-5">
         <div className="relative h-72 overflow-hidden rounded-3xl">
           <Image
@@ -280,8 +284,10 @@ export default function HomePage() {
           })}
         </div>
       </section>
+      </FadeIn>
 
       {/* Our Gallery */}
+      <FadeIn delay={100}>
       <section className="px-4 pt-7" aria-labelledby="gallery-heading">
         <div className="flex items-center justify-between">
           <h2 id="gallery-heading" className="font-heading text-lg font-bold text-navy-text">
@@ -300,8 +306,10 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      </FadeIn>
 
       {/* Upcoming events */}
+      <FadeIn delay={150}>
       <section className="px-4 pt-7" aria-labelledby="events-heading">
         <div className="flex items-center justify-between">
           <h2 id="events-heading" className="font-heading text-lg font-bold text-navy-text">
@@ -370,8 +378,10 @@ export default function HomePage() {
           })}
         </ul>
       </section>
+      </FadeIn>
 
       {/* Clubs */}
+      <FadeIn delay={200}>
       <section className="px-4 pt-7" aria-labelledby="clubs-heading">
         <h2 id="clubs-heading" className="font-heading text-lg font-bold text-navy-text">
           Our clubs
@@ -423,10 +433,12 @@ export default function HomePage() {
           })}
         </div>
       </section>
+      </FadeIn>
 
       {joinClubName && <JoinForm club={joinClubName} onClose={() => setJoinClubName(null)} />}
 
       {/* Testimonial */}
+      <FadeIn delay={250}>
       <section className="px-4 pt-7 pb-6" aria-labelledby="testimonial-heading">
         <h2 id="testimonial-heading" className="sr-only">
           Student testimonial
@@ -448,6 +460,7 @@ export default function HomePage() {
           </figcaption>
         </figure>
       </section>
+      </FadeIn>
     </AppShell>
   )
 }

@@ -146,3 +146,27 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Page slide-in transition */
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ripple animation */
+@keyframes ripple-effect {
+  to { transform: scale(4); opacity: 0; }
+}
+
+.animate-ripple {
+  animation: ripple-effect 0.6s ease-out forwards;
+}
+
+/* Smooth toggle button active ring */
+.toggle-ring:focus-visible {
+  @apply ring-2 ring-primary/50 ring-offset-1;
+}

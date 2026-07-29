@@ -1,9 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CalendarClock, ExternalLink, GraduationCap } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { FadeIn } from '@/components/fade-in'
+import { ScholarshipCardSkeleton } from '@/components/skeleton'
 import { DemoStateToggle } from '@/components/demo-state-toggle'
 import { NotifyMeForm } from '@/components/notify-me-form'
 import { cn } from '@/lib/utils'
@@ -65,7 +67,7 @@ function DeadlineBadge({ daysLeft }: { daysLeft: number }) {
 
 function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; applied: boolean }) {
   return (
-    <li className="rounded-2xl border border-border bg-card p-4">
+    <li className="rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
       <div className="flex items-start justify-between gap-3">
         <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
           <GraduationCap className="size-5" aria-hidden="true" />
@@ -101,25 +103,42 @@ function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; a
 export default function ScholarshipsPage() {
   const [showPreview, setShowPreview] = useState(false)
   const [applied, setApplied] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 400)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <AppShell title="Scholarships">
+      <FadeIn>
       <section className="px-4 pt-5">
         <h1 className="font-heading text-2xl font-bold text-navy-text text-balance">Scholarships &amp; funding</h1>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground text-pretty">
           We list verified scholarships here as they become available. Check back often or sign up to get notified.
         </p>
       </section>
+      </FadeIn>
 
+      <FadeIn delay={50}>
       <div className="px-4 pt-4">
         <DemoStateToggle
           state={showPreview ? 'populated' : 'empty'}
           onChange={(s) => setShowPreview(s === 'populated')}
         />
       </div>
+      </FadeIn>
 
-      {showPreview ? (
+      {loading ? (
+        <div className="flex flex-col gap-3 px-4 pt-6 pb-8">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <ScholarshipCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : showPreview ? (
         <>
+          <FadeIn delay={100}>
           <p className="px-4 pt-4 text-xs font-medium text-muted-foreground">
             Layout preview · sorted by deadline
           </p>
@@ -128,8 +147,10 @@ export default function ScholarshipsPage() {
               <ScholarshipCard key={s.id} scholarship={s} applied={applied.includes(s.id)} />
             ))}
           </ul>
+          </FadeIn>
         </>
       ) : (
+        <FadeIn delay={100}>
         <section
           className="flex flex-col items-center px-6 pt-6 pb-10 text-center"
           aria-label="No scholarships available"
@@ -150,6 +171,7 @@ export default function ScholarshipsPage() {
             <NotifyMeForm topic="scholarships" />
           </div>
         </section>
+        </FadeIn>
       )}
     </AppShell>
   )

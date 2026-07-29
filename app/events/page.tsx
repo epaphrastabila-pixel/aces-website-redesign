@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Calendar, CalendarPlus, MapPin, Clock, UserCheck, Timer, Check, ExternalLink } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
+import { FadeIn } from '@/components/fade-in'
 import { useRegistration } from '@/lib/registration-context'
 import { useAcesAuth } from '@/lib/aces-auth-context'
 import { cn } from '@/lib/utils'
@@ -142,13 +143,16 @@ export default function EventsPage() {
 
   return (
     <AppShell title="Events">
+      <FadeIn>
       <section className="px-4 pt-5">
         <h1 className="font-heading text-2xl font-bold text-navy-text text-balance">ACES calendar</h1>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground text-pretty">
           Everything happening in the Land of ACES — mark your calendar.
         </p>
       </section>
+      </FadeIn>
 
+      <FadeIn delay={50}>
       <div className="flex gap-2 px-4 pt-4 pb-1" role="tablist" aria-label="Time period">
         {(['upcoming', 'past'] as TimePeriod[]).map((p) => (
           <button
@@ -158,7 +162,7 @@ export default function EventsPage() {
             aria-selected={period === p}
             onClick={() => setPeriod(p)}
             className={cn(
-              'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors',
+              'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all',
               period === p
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-secondary text-secondary-foreground hover:bg-accent',
@@ -168,7 +172,9 @@ export default function EventsPage() {
           </button>
         ))}
       </div>
+      </FadeIn>
 
+      <FadeIn delay={100}>
       <div role="tablist" aria-label="Filter events by category" className="flex gap-2 overflow-x-auto no-scrollbar px-4 pt-2 pb-1">
         {categories.map((cat) => (
           <button
@@ -178,7 +184,7 @@ export default function EventsPage() {
             aria-selected={activeCategory === cat.key}
             onClick={() => setActiveCategory(cat.key)}
             className={cn(
-              'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-colors',
+              'shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all',
               activeCategory === cat.key
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-secondary text-secondary-foreground hover:bg-accent',
@@ -188,6 +194,7 @@ export default function EventsPage() {
           </button>
         ))}
       </div>
+      </FadeIn>
 
       {filtered.length > 0 ? (
         <p className="px-4 pt-4 text-xs font-medium text-muted-foreground">
@@ -199,6 +206,7 @@ export default function EventsPage() {
         </p>
       )}
 
+      <FadeIn delay={150}>
       <ul className="flex flex-col gap-3 px-4 pt-3 pb-8">
         {filtered.map((event) => {
           const registered = isRegistered(event.name)
@@ -286,6 +294,7 @@ export default function EventsPage() {
           )
         })}
       </ul>
+      </FadeIn>
     </AppShell>
   )
 }
