@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { X, Mail, GraduationCap, BookOpen } from 'lucide-react'
+import { X, Mail, MapPin, GraduationCap, BookOpen, Award, Beaker, Briefcase, Library } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -16,6 +16,12 @@ export type StaffMember = {
   expertise: string
   initials: string
   office?: string
+  email?: string
+  educationalBackground?: string[]
+  researchInterests?: string[]
+  positions?: string[]
+  publications?: string[]
+  coursesTaught?: string[]
 }
 
 type StaffMemberWithDetail = StaffMember & {
@@ -32,8 +38,11 @@ export function StaffModal({
   open: boolean
   onClose: () => void
 }) {
+  const [imgError, setImgError] = useState(false)
+
   useEffect(() => {
     if (!open) return
+    setImgError(false)
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -63,7 +72,7 @@ export function StaffModal({
 
       <div
         className={cn(
-          'relative w-full max-w-md rounded-t-3xl bg-background px-6 pb-8 pt-6 shadow-2xl transition-transform duration-300',
+          'relative max-h-[85vh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-background px-6 pb-8 pt-6 shadow-2xl transition-transform duration-300',
           open ? 'translate-y-0' : 'translate-y-full',
         )}
         onClick={(e) => e.stopPropagation()}
@@ -74,65 +83,43 @@ export function StaffModal({
           aria-label="Close"
           variant="secondary"
           size="icon"
-          className="absolute right-4 top-4 size-9 rounded-full border-none text-muted-foreground hover:bg-accent"
+          className="absolute right-4 top-4 z-10 size-9 rounded-full border-none text-muted-foreground hover:bg-accent"
         >
           <X className="size-4" aria-hidden="true" />
         </Button>
 
         <div className="flex justify-center">
-          <div className="relative size-28 overflow-hidden rounded-2xl border-4 border-border shadow-lg">
-            <Image
-              src="/placeholder.svg"
-              alt={member.name}
-              fill
-              sizes="112px"
-              className="object-cover"
-              priority
-            />
-            <span className="absolute inset-0 flex items-center justify-center font-heading text-2xl font-bold text-muted-foreground/50">
-              {member.initials}
-            </span>
+          <div className="relative size-28 shrink-0 overflow-hidden rounded-2xl border-4 border-border shadow-lg">
+            {imgError ? (
+              <div className="flex size-full items-center justify-center bg-muted">
+                <span className="font-heading text-2xl font-bold text-muted-foreground/50">
+                  {member.initials}
+                </span>
+              </div>
+            ) : (
+              <Image
+                src={`/images/STAFF/${member.id}.jpg`}
+                alt={member.name}
+                fill
+                sizes="112px"
+                className="object-cover"
+                priority
+                onError={() => setImgError(true)}
+              />
+            )}
           </div>
         </div>
 
         <div className="mt-4 text-center">
           <h2 className="font-heading text-xl font-bold text-foreground">{member.name}</h2>
           <p className="mt-0.5 text-sm font-semibold text-primary">{member.role}</p>
+          <p className="text-xs text-muted-foreground">{member.department}</p>
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
-          <div className="flex items-center gap-3 rounded-xl bg-secondary px-4 py-3">
-            <GraduationCap className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-            <div>
-              <p className="text-xs text-muted-foreground">Department</p>
-              <p className="text-sm font-medium text-foreground">{member.department}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 rounded-xl bg-secondary px-4 py-3">
-            <BookOpen className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-            <div>
-              <p className="text-xs text-muted-foreground">Expertise</p>
-              <p className="text-sm font-medium text-foreground">{member.expertise}</p>
-            </div>
-          </div>
-
-          {member.courses.length > 0 && (
-            <div className="rounded-xl bg-secondary px-4 py-3">
-              <p className="text-xs text-muted-foreground">Courses taught</p>
-              <ul className="mt-1.5 flex flex-col gap-1">
-                {member.courses.map((c) => (
-                  <li key={c} className="text-sm font-medium text-foreground">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
           {member.office && (
             <div className="flex items-center gap-3 rounded-xl bg-secondary px-4 py-3">
-              <GraduationCap className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+              <MapPin className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
               <div>
                 <p className="text-xs text-muted-foreground">Office</p>
                 <p className="text-sm font-medium text-foreground">{member.office}</p>
@@ -150,6 +137,124 @@ export function StaffModal({
               <p className="truncate text-sm font-medium text-foreground">{member.email}</p>
             </div>
           </a>
+
+          <div className="flex items-center gap-3 rounded-xl bg-secondary px-4 py-3">
+            <GraduationCap className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <div>
+              <p className="text-xs text-muted-foreground">Department</p>
+              <p className="text-sm font-medium text-foreground">{member.department}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 rounded-xl bg-secondary px-4 py-3">
+            <BookOpen className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <div>
+              <p className="text-xs text-muted-foreground">Expertise</p>
+              <p className="text-sm font-medium text-foreground">{member.expertise}</p>
+            </div>
+          </div>
+
+          {member.educationalBackground && member.educationalBackground.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <GraduationCap className="size-3.5" aria-hidden="true" />
+                Educational Background
+              </p>
+              <ul className="mt-1.5 flex flex-col gap-1">
+                {member.educationalBackground.map((item) => (
+                  <li key={item} className="text-sm font-medium text-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.researchInterests && member.researchInterests.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Beaker className="size-3.5" aria-hidden="true" />
+                Research Interests
+              </p>
+              <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                {member.researchInterests.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-lg bg-background px-2.5 py-1 text-xs font-medium text-foreground"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.positions && member.positions.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Briefcase className="size-3.5" aria-hidden="true" />
+                Positions Held
+              </p>
+              <ul className="mt-1.5 flex flex-col gap-1">
+                {member.positions.map((item) => (
+                  <li key={item} className="text-sm font-medium text-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.coursesTaught && member.coursesTaught.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Library className="size-3.5" aria-hidden="true" />
+                Courses Taught
+              </p>
+              <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                {member.coursesTaught.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-lg bg-background px-2.5 py-1 text-xs font-medium text-foreground"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.courses.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <BookOpen className="size-3.5" aria-hidden="true" />
+                Current Courses
+              </p>
+              <ul className="mt-1.5 flex flex-col gap-1">
+                {member.courses.map((c) => (
+                  <li key={c} className="text-sm font-medium text-foreground">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {member.publications && member.publications.length > 0 && (
+            <div className="rounded-xl bg-secondary px-4 py-3">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Award className="size-3.5" aria-hidden="true" />
+                Selected Publications
+              </p>
+              <ul className="mt-1.5 flex flex-col gap-1">
+                {member.publications.map((item) => (
+                  <li key={item} className="text-sm font-medium text-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className="mt-5">
@@ -165,3 +270,5 @@ export function StaffModal({
     </div>
   )
 }
+
+
