@@ -328,7 +328,7 @@ export default function HomePage() {
             const hasRegLink = 'regLink' in event
             return (
               <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
-                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                <Link href="/events" className="relative aspect-[4/3] overflow-hidden bg-muted block">
                   <Image src={event.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   <span className="absolute left-2 top-2 rounded-full bg-black/30 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
                     {event.date}
@@ -336,7 +336,7 @@ export default function HomePage() {
                   <span className="absolute right-2 top-2">
                     <SeatsBadge left={left} className="bg-black/40 backdrop-blur-sm text-white!" />
                   </span>
-                </div>
+                </Link>
                 <div className="flex flex-1 flex-col gap-1 p-3">
                   <h2 className="text-sm font-semibold leading-snug text-foreground">{event.name}</h2>
                   <p className="text-xs text-muted-foreground line-clamp-2">{event.detail}</p>
@@ -393,14 +393,14 @@ export default function HomePage() {
             const spots = club.capacity - club.members - (member ? 1 : 0)
             return (
               <div key={club.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
-                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                <Link href="/events" className="relative aspect-[4/3] overflow-hidden bg-muted block">
                   <Image src={club.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   {member && (
                     <span className="absolute right-2 top-2 rounded-full bg-success/30 px-2 py-0.5 text-[10px] font-bold text-success backdrop-blur-sm">
                       Member ✓
                     </span>
                   )}
-                </div>
+                </Link>
                 <div className="flex flex-1 flex-col gap-1 p-3">
                   <h2 className="text-sm font-semibold leading-snug text-foreground">ACES {club.name}</h2>
                   <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{club.description}</p>
