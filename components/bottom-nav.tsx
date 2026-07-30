@@ -40,7 +40,7 @@ export function BottomNav() {
                   href={tab.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border border-[#f97316] py-2.5 text-[11px] font-medium',
+                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border py-2.5 text-[11px] font-medium marketplace-border-glow',
                     'active:scale-[0.97] transition-transform duration-150',
                     'text-navy-text',
                     active && 'text-white',

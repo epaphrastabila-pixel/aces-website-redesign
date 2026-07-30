@@ -303,3 +303,15 @@
 .header-link-glow {
   animation: header-link-glow 3s ease-in-out infinite;
 }
+
+/* 7. Marketplace nav tab animated border glow */
+@keyframes marketplace-border-glow {
+  0%, 100% { border-color: #6366f1; box-shadow: 0 0 8px 1px rgba(99,102,241,0.3); }
+  25% { border-color: #8b5cf6; box-shadow: 0 0 8px 1px rgba(139,92,246,0.3); }
+  50% { border-color: #ec4899; box-shadow: 0 0 8px 1px rgba(236,72,153,0.3); }
+  75% { border-color: #06b6d4; box-shadow: 0 0 8px 1px rgba(6,182,212,0.3); }
+}
+
+.marketplace-border-glow {
+  animation: marketplace-border-glow 3s ease-in-out infinite;
+}
