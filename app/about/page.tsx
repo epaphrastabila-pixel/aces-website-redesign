@@ -2,13 +2,21 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { ArrowRight, Shield, GraduationCap, Target, Briefcase, Repeat, Globe, Lightbulb, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/fade-in'
 import { AppShell } from '@/components/app-shell'
 
 const tabs = ['Mission', 'Vision', 'Our Logo']
+
+const accentColors = [
+  { border: '#3b82f6', dot: 'bg-blue-500' },
+  { border: '#f59e0b', dot: 'bg-amber-500' },
+  { border: '#10b981', dot: 'bg-emerald-500' },
+  { border: '#8b5cf6', dot: 'bg-purple-500' },
+  { border: '#f43f5e', dot: 'bg-rose-500' },
+]
 
 const objectives = [
   {
@@ -40,6 +48,16 @@ const objectives = [
 
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState(0)
+  const [activeObj, setActiveObj] = useState(0)
+  const objScrollRef = useRef<HTMLDivElement>(null)
+
+  const handleObjScroll = useCallback(() => {
+    const container = objScrollRef.current
+    if (!container) return
+    const cardWidth = container.clientWidth * 0.85 + 16
+    const index = Math.round(container.scrollLeft / cardWidth)
+    setActiveObj(Math.min(index, 4))
+  }, [])
 
   return (
     <AppShell title="About ACES">
@@ -146,21 +164,59 @@ export default function AboutPage() {
           <h2 id="objectives-heading" className="font-heading text-lg font-bold text-navy-text">
             Our Objectives
           </h2>
-          <div className="mt-3 flex flex-col gap-3">
-            {objectives.map((obj) => {
-              const Icon = obj.icon
-              return (
-                <div key={obj.title} className="flex items-start gap-4 rounded-2xl bg-secondary/80 p-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="text-sm font-semibold text-navy-text">{obj.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{obj.description}</p>
+          <div className="relative">
+            <div
+              ref={objScrollRef}
+              onScroll={handleObjScroll}
+              className="mt-3 flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar"
+            >
+              {objectives.map((obj, i) => {
+                const Icon = obj.icon
+                const color = accentColors[i]
+                return (
+                  <div
+                    key={obj.title}
+                    className="relative w-[85%] shrink-0 snap-start rounded-2xl border border-border bg-card p-5"
+                    style={{ borderLeft: `4px solid ${color.border}` }}
+                  >
+                    <span
+                      className="absolute top-2 left-3 select-none text-6xl font-black leading-none"
+                      style={{ color: color.border, opacity: 0.12 }}
+                      aria-hidden="true"
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className="relative flex size-10 items-center justify-center rounded-full text-white"
+                      style={{ backgroundColor: color.border }}
+                    >
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="mt-3 text-sm font-bold text-foreground">{obj.title}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{obj.description}</p>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
+            <div className="mt-4 flex justify-center gap-2">
+              {objectives.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => {
+                    const container = objScrollRef.current
+                    const child = container?.children[i] as HTMLElement | undefined
+                    child?.scrollIntoView({ behavior: 'smooth', inline: 'start' })
+                  }}
+                  aria-label={`View objective ${i + 1}`}
+                  className={`size-2 rounded-full transition-all duration-300 ${
+                    i === activeObj ? 'w-5' : ''
+                  } ${accentColors[i].dot} ${
+                    i === activeObj ? 'opacity-100' : 'opacity-40 hover:opacity-70'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </section>
       </FadeIn>
