@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { BookOpen, GraduationCap, SearchX, ArrowLeft } from 'lucide-react'
+import { BookOpen, GraduationCap, SearchX, ArrowLeft, Layers } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AppShell } from '@/components/app-shell'
 import { FadeIn } from '@/components/fade-in'
 import { Button } from '@/components/ui/button'
 import { CourseFilterBar } from '@/components/courses/course-filter-bar'
 import { CourseCard } from '@/components/courses/course-card'
+import { DemoStateToggle } from '@/components/demo-state-toggle'
 import { courses, getYears, yearThemes } from '@/lib/courses-data'
 import { useNotifications } from '@/lib/notification-context'
 
@@ -15,6 +16,7 @@ export default function CoursesPage() {
   const [year, setYear] = useState(1)
   const [semester, setSemester] = useState('Sem 1')
   const [search, setSearch] = useState('')
+  const [showEmpty, setShowEmpty] = useState(false)
   const [notified, setNotified] = useState(() => {
     if (typeof window === 'undefined') return false
     return localStorage.getItem('aces_notify_slides') === 'true'
@@ -86,6 +88,15 @@ export default function CoursesPage() {
       />
 
       <FadeIn delay={50}>
+        <div className="px-4 pt-4">
+          <DemoStateToggle
+            state={showEmpty ? 'empty' : 'populated'}
+            onChange={(s) => setShowEmpty(s === 'empty')}
+          />
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={75}>
         <section className="px-4 pt-2 pb-8">
           {loading ? (
             <div className="mt-4 flex flex-col gap-3">
@@ -93,6 +104,38 @@ export default function CoursesPage() {
                 <div key={i} className="h-44 animate-pulse rounded-2xl bg-muted" />
               ))}
             </div>
+          ) : showEmpty ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center py-16 text-center"
+            >
+              <Layers className="size-10 text-muted-foreground/40" aria-hidden="true" />
+              <p className="mt-3 text-sm font-medium text-foreground">No courses available</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                There are currently no courses available for Year {year}, {semester === 'Sem 1' ? 'First' : 'Second'} Semester.
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground/60">
+                Try another semester or return to the populated preview.
+              </p>
+              <div className="mt-4 flex gap-3">
+                <Button
+                  type="button"
+                  onClick={() => setSemester(semester === 'Sem 1' ? 'Sem 2' : 'Sem 1')}
+                  className="rounded-full px-5 py-2.5 text-xs font-bold"
+                >
+                  Switch to {semester === 'Sem 1' ? 'Semester 2' : 'Semester 1'}
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setShowEmpty(false)}
+                  className="rounded-full px-5 py-2.5 text-xs font-bold"
+                >
+                  View Populated State
+                </Button>
+              </div>
+            </motion.div>
           ) : visible.length > 0 ? (
             <AnimatePresence mode="wait">
               <motion.div
