@@ -40,7 +40,7 @@ export function BottomNav() {
                   href={tab.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border px-3 py-2 text-[11px] font-medium marketplace-border-glow',
+                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border px-4 py-2.5 text-xs font-medium marketplace-border-glow-temporal',
                     'active:scale-[0.97] transition-transform duration-150',
                     'text-navy-text',
                     active && 'text-white',
@@ -68,7 +68,7 @@ export function BottomNav() {
                   href={tab.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
+                    'relative flex flex-col items-center gap-0.5 py-2 text-[10px] font-medium transition-colors',
                     active ? 'text-primary marketplace-border-glow rounded-full border border-transparent' : 'text-muted-foreground',
                   )}
                 >

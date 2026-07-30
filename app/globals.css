@@ -331,3 +331,17 @@
 .group:hover .marketplace-hover-fill {
   animation: marketplace-hover-shift 3s ease-in-out infinite;
 }
+
+/* Marketplace temporal glow — pulses in and out */
+@keyframes marketplace-border-glow-temporal {
+  0%, 100% { border-color: transparent; box-shadow: none; }
+  10% { border-color: #6366f1; box-shadow: 0 0 5px 2px rgba(99,102,241,0.3), 0 0 0 2px rgba(99,102,241,0.5); }
+  20% { border-color: #8b5cf6; box-shadow: 0 0 5px 2px rgba(139,92,246,0.3), 0 0 0 2px rgba(139,92,246,0.5); }
+  30% { border-color: #ec4899; box-shadow: 0 0 5px 2px rgba(236,72,153,0.3), 0 0 0 2px rgba(236,72,153,0.5); }
+  40% { border-color: #06b6d4; box-shadow: 0 0 5px 2px rgba(6,182,212,0.3), 0 0 0 2px rgba(6,182,212,0.5); }
+  50% { border-color: transparent; box-shadow: none; }
+}
+
+.marketplace-border-glow-temporal {
+  animation: marketplace-border-glow-temporal 5s ease-in-out infinite;
+}
