@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,6 +23,7 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [showCheck, setShowCheck] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   if (!product) {
     return (
@@ -58,6 +59,11 @@ export default function ProductDetailPage() {
     setTimeout(() => setShowCheck(false), 1500)
   }
 
+  useEffect(() => {
+    const child = scrollRef.current?.children[selectedImage] as HTMLElement | undefined
+    child?.scrollIntoView({ behavior: 'smooth', inline: 'start' })
+  }, [selectedImage, activeImages])
+
   const soldOut = product.stock === 0
   const canAddToCart = !soldOut && (!product.sizing || selectedSize !== null) && (!product.colors || selectedColor !== null)
 
@@ -87,7 +93,7 @@ export default function ProductDetailPage() {
       </div>
 
       <div className="mt-3 px-4">
-        <div className="relative flex overflow-x-auto snap-x snap-mandatory no-scrollbar rounded-2xl">
+        <div ref={scrollRef} className="relative flex overflow-x-auto snap-x snap-mandatory no-scrollbar rounded-2xl">
           {activeImages.map((img, i) => (
             <button
               key={i}
