@@ -49,7 +49,7 @@ export default function ResourcesPage() {
               key={hub.href}
               href={hub.href}
               onClick={() => addItem({ href: hub.href, label: hub.label, subtitle: hub.description })}
-              className="flex items-start gap-4 rounded-3xl border border-border bg-card p-5 transition-colors hover:border-primary/40 hover:bg-secondary/30"
+              className="flex items-start gap-4 rounded-3xl border border-border bg-card p-5 transition-colors hover:border-primary/40 hover:bg-secondary/50"
             >
               <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
                 <Icon className="size-6" aria-hidden="true" />
@@ -81,7 +81,7 @@ export default function ResourcesPage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="w-44 shrink-0 rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-secondary/40"
+                className="w-44 shrink-0 rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-secondary/50"
               >
                 <p className="text-sm font-semibold text-foreground">{item.label}</p>
                 {item.subtitle && (

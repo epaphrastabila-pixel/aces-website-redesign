@@ -5,14 +5,18 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 export type AcesUser = {
   name: string
   email: string
+  phone?: string
+  program?: string
+  year?: string
 }
 
 type AcesAuthContextValue = {
   user: AcesUser | null
   isAuthenticated: boolean
-  register: (data: { name: string; email: string; password: string }) => { ok: true } | { ok: false; error: string }
+  register: (data: { name: string; email: string; password: string; phone?: string; program?: string; year?: string }) => { ok: true } | { ok: false; error: string }
   login: (data: { email: string; password: string }) => { ok: true } | { ok: false; error: string }
   logout: () => void
+  updateProfile: (data: { name?: string; phone?: string; program?: string; year?: string }) => void
 }
 
 const AcesAuthContext = createContext<AcesAuthContextValue | null>(null)
@@ -56,7 +60,7 @@ export function AcesAuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const register = useCallback(
-    (data: { name: string; email: string; password: string }): { ok: true } | { ok: false; error: string } => {
+    (data: { name: string; email: string; password: string; phone?: string; program?: string; year?: string }): { ok: true } | { ok: false; error: string } => {
       const email = data.email.toLowerCase().trim()
       const accounts = getStoredAccounts()
 
@@ -73,13 +77,22 @@ export function AcesAuthProvider({ children }: { children: ReactNode }) {
       const record: StoredUser = {
         name: data.name.trim(),
         email,
+        phone: data.phone?.trim() || undefined,
+        program: data.program?.trim() || undefined,
+        year: data.year || undefined,
         password: data.password,
         registeredAt: new Date().toISOString(),
       }
       accounts[email] = record
       localStorage.setItem('aces_accounts', JSON.stringify(accounts))
 
-      const sessionUser: AcesUser = { name: record.name, email: record.email }
+      const sessionUser: AcesUser = {
+        name: record.name,
+        email: record.email,
+        phone: record.phone,
+        program: record.program,
+        year: record.year,
+      }
       setSession(sessionUser)
       setUser(sessionUser)
       return { ok: true }
@@ -100,7 +113,13 @@ export function AcesAuthProvider({ children }: { children: ReactNode }) {
         return { ok: false, error: 'Incorrect password.' }
       }
 
-      const sessionUser: AcesUser = { name: record.name, email: record.email }
+      const sessionUser: AcesUser = {
+        name: record.name,
+        email: record.email,
+        phone: record.phone,
+        program: record.program,
+        year: record.year,
+      }
       setSession(sessionUser)
       setUser(sessionUser)
       return { ok: true }
@@ -113,9 +132,40 @@ export function AcesAuthProvider({ children }: { children: ReactNode }) {
     setUser(null)
   }, [])
 
+  const updateProfile = useCallback(
+    (data: { name?: string; phone?: string; program?: string; year?: string }) => {
+      if (!user) return
+      const accounts = getStoredAccounts()
+      const key = user.email.toLowerCase().trim()
+      const record = accounts[key]
+      if (!record) return
+
+      const updated: StoredUser = {
+        ...record,
+        name: data.name?.trim() || record.name,
+        phone: data.phone !== undefined ? (data.phone.trim() || undefined) : record.phone,
+        program: data.program !== undefined ? (data.program.trim() || undefined) : record.program,
+        year: data.year !== undefined ? (data.year || undefined) : record.year,
+      }
+      accounts[key] = updated
+      localStorage.setItem('aces_accounts', JSON.stringify(accounts))
+
+      const sessionUser: AcesUser = {
+        name: updated.name,
+        email: updated.email,
+        phone: updated.phone,
+        program: updated.program,
+        year: updated.year,
+      }
+      setSession(sessionUser)
+      setUser(sessionUser)
+    },
+    [user],
+  )
+
   const value = useMemo(
-    () => ({ user, isAuthenticated: user !== null, register, login, logout }),
-    [user, register, login, logout],
+    () => ({ user, isAuthenticated: user !== null, register, login, logout, updateProfile }),
+    [user, register, login, logout, updateProfile],
   )
 
   return <AcesAuthContext.Provider value={value}>{children}</AcesAuthContext.Provider>

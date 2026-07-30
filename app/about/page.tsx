@@ -55,7 +55,7 @@ export default function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/90 to-transparent" aria-hidden="true" />
             <div className="absolute bottom-0 px-5 pb-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-secondary">Technology For Our Age</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-navy-foreground/80">Technology For Our Age</p>
               <h1 className="font-heading text-xl font-bold text-navy-foreground text-balance">
                 Association of Computer Engineering Students
               </h1>
@@ -150,7 +150,7 @@ export default function AboutPage() {
             {objectives.map((obj) => {
               const Icon = obj.icon
               return (
-                <div key={obj.title} className="flex items-start gap-4 rounded-2xl bg-secondary/60 p-4">
+                <div key={obj.title} className="flex items-start gap-4 rounded-2xl bg-secondary/80 p-4">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
@@ -202,7 +202,7 @@ export default function AboutPage() {
               </Link>
               <Link
                 href="/staff"
-                className="inline-flex items-center gap-1.5 rounded-full bg-navy-foreground/10 px-4 py-2.5 text-xs font-semibold text-navy-foreground"
+                className="inline-flex items-center gap-1.5 rounded-full bg-navy-foreground/20 px-4 py-2.5 text-xs font-semibold text-navy-foreground"
               >
                 Staff
                 <ArrowRight className="size-3.5" aria-hidden="true" />

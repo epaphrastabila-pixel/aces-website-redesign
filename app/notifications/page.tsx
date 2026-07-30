@@ -62,7 +62,7 @@ function NotifItem({ notif }: { notif: AppNotification }) {
             View details
           </Link>
         )}
-        <p className="mt-1 text-[10px] text-muted-foreground/60">
+        <p className="mt-1 text-[10px] text-muted-foreground">
           {new Date(notif.createdAt).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -116,7 +116,7 @@ export default function NotificationsPage() {
 
       {notifications.length === 0 ? (
         <section className="flex flex-col items-center px-6 py-16 text-center">
-          <Bell className="size-12 text-muted-foreground/30" aria-hidden="true" />
+          <Bell className="size-12 text-muted-foreground/60" aria-hidden="true" />
           <h2 className="mt-4 font-heading text-lg font-bold text-foreground">No notifications yet</h2>
           <p className="mt-1.5 max-w-xs text-sm text-muted-foreground">
             Notifications about events, orders, and updates will appear here.

@@ -56,7 +56,7 @@ function DeadlineBadge({ daysLeft }: { daysLeft: number }) {
     <span
       className={cn(
         'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold',
-        urgent ? 'bg-destructive/10 text-destructive' : 'bg-secondary text-primary',
+        urgent ? 'bg-destructive/20 text-destructive' : 'bg-secondary text-primary',
       )}
     >
       <CalendarClock className="size-3" aria-hidden="true" />
@@ -77,10 +77,10 @@ function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; a
       <h2 className="mt-3 font-heading text-base font-bold text-navy-text">{scholarship.name}</h2>
       <p className="text-xs text-muted-foreground">{scholarship.provider}</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium">
+        <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
           {scholarship.amount}
         </span>
-        <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium">
+        <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
           {scholarship.eligibility}
         </span>
       </div>

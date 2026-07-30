@@ -16,6 +16,9 @@ function RegisterForm() {
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [program, setProgram] = useState('')
+  const [year, setYear] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -43,7 +46,14 @@ function RegisterForm() {
       return
     }
 
-    const result = register({ name: name.trim(), email: email.trim(), password })
+    const result = register({
+      name: name.trim(),
+      email: email.trim(),
+      password,
+      phone: phone.trim() || undefined,
+      program: program.trim() || undefined,
+      year: year || undefined,
+    })
     if (!result.ok) {
       setError(result.error)
       return
@@ -109,6 +119,54 @@ function RegisterForm() {
             autoComplete="email"
             className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
           />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Phone number <span className="font-normal lowercase text-muted-foreground/60">(optional)</span>
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="+233 XX XXX XXXX"
+            autoComplete="tel"
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="program" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Program of study <span className="font-normal lowercase text-muted-foreground/60">(optional)</span>
+          </label>
+          <input
+            id="program"
+            type="text"
+            value={program}
+            onChange={(e) => setProgram(e.target.value)}
+            placeholder="e.g. Computer Engineering"
+            autoComplete="off"
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground input-focus-cycle focus:border-primary focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="reg-year" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Year of study <span className="font-normal lowercase text-muted-foreground/60">(optional)</span>
+          </label>
+          <select
+            id="reg-year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-foreground outline-none input-focus-cycle focus:border-primary focus:outline-none"
+          >
+            <option value="">Select year</option>
+            <option value="1">Year 1</option>
+            <option value="2">Year 2</option>
+            <option value="3">Year 3</option>
+            <option value="4">Year 4</option>
+          </select>
         </div>
 
         <div>

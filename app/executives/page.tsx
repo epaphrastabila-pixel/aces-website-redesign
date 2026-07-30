@@ -128,7 +128,7 @@ export default function ExecutivesPage() {
                 key={exec.name}
                 className="flex flex-col items-center rounded-2xl border border-border bg-card p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5"
               >
-                <div className="relative size-16 overflow-hidden rounded-full border-2 border-border">
+                <div className="relative size-16 overflow-hidden rounded-full border-2 border-border/80">
                   <Image
                     src={exec.photo}
                     alt={exec.name}

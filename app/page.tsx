@@ -75,7 +75,7 @@ function SeatsBadge({ left, className }: { left: number; className?: string }) {
     <span
       className={cn(
         'inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold',
-        left <= 5 ? 'bg-destructive/15 text-destructive' : left <= 15 ? 'bg-warning/15 text-warning' : 'bg-success/15 text-success',
+        left <= 5 ? 'bg-destructive/30 text-destructive' : left <= 15 ? 'bg-warning/30 text-warning' : 'bg-success/30 text-success',
         className,
       )}
     >
@@ -116,7 +116,7 @@ function JoinForm({ club, onClose }: { club: string; onClose: () => void }) {
 
         {submitted ? (
           <div className="py-6 text-center">
-            <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-success/15">
+            <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-success/30">
               <UserCheck className="size-7 text-success animate-check-bounce" aria-hidden="true" />
             </span>
             <h3 className="mt-4 font-heading text-lg font-bold text-foreground">Welcome to {club}!</h3>
@@ -211,7 +211,7 @@ export default function HomePage() {
       <section className="px-4 pt-4">
         <div className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-background border border-primary/20 p-3">
           <span className="text-lg" aria-hidden="true">🔥</span>
-          <p className="flex-1 text-xs font-semibold text-navy">
+          <p className="flex-1 text-xs font-semibold text-navy-text">
             CODEFEST is here! Register now for the challenges
           </p>
           <Button
@@ -396,7 +396,7 @@ export default function HomePage() {
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image src={club.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   {member && (
-                    <span className="absolute right-2 top-2 rounded-full bg-success/20 px-2 py-0.5 text-[10px] font-bold text-success backdrop-blur-sm">
+                    <span className="absolute right-2 top-2 rounded-full bg-success/30 px-2 py-0.5 text-[10px] font-bold text-success backdrop-blur-sm">
                       Member ✓
                     </span>
                   )}
