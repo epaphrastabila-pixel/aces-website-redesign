@@ -228,18 +228,16 @@ export default function MarketplacePage() {
                       className="object-cover transition-transform duration-300 group-hover/card:scale-105"
                       priority={i < 4}
                     />
-                    <span className="absolute left-2 top-2 flex max-w-[calc(100%-16px)] items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-sm">
+                    <span className="absolute left-2 top-2 flex max-w-[calc(100%-16px)] items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
                       <span className="shrink-0">{categoryEmoji[product.category] || '📦'}</span>
                       <span className="truncate">{product.category}</span>
                     </span>
                   </div>
                   <div className="p-5">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="min-w-0 flex-1 text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
-                      <span className="shrink-0 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
-                        GH₵ {product.price}
-                      </span>
-                    </div>
+                    <h3 className="text-sm font-semibold leading-snug line-clamp-2 text-foreground">{product.name}</h3>
+                    <span className="mt-1 inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
+                      GH₵ {product.price}
+                    </span>
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">{product.description}</p>
                     <div className="my-3 border-t border-border" />
                     <div className="flex items-center justify-between">
