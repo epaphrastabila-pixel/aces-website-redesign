@@ -2,9 +2,10 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { CalendarClock, ExternalLink, GraduationCap } from 'lucide-react'
+import { CalendarClock, ExternalLink, GraduationCap, Check, FileText, MapPin } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
 import { FadeIn } from '@/components/fade-in'
+import { Button } from '@/components/ui/button'
 import { ScholarshipCardSkeleton } from '@/components/skeleton'
 import { DemoStateToggle } from '@/components/demo-state-toggle'
 import { NotifyMeForm } from '@/components/notify-me-form'
@@ -18,9 +19,46 @@ type Scholarship = {
   deadline: string
   daysLeft: number
   eligibility: string
+  studyLevel?: string
+  location?: string
+  status?: 'Open' | 'Closed'
+  openDate?: string
+  eligibilityDetails?: string[]
+  requiredDocuments?: string[]
+  applyUrl?: string
+  warning?: string
 }
 
 const previewCards: Scholarship[] = [
+  {
+    id: 'ghana-gas-2026',
+    name: 'Ghana Gas 2026/2027 Local Scholarship Programme',
+    provider: 'Ghana National Gas Company',
+    amount: 'Full scholarship',
+    deadline: '15 August 2026',
+    daysLeft: 16,
+    eligibility: 'Undergraduate & Diploma/HND',
+    studyLevel: 'Undergraduate and Diploma/HND',
+    location: 'Ghana',
+    status: 'Open',
+    openDate: '15 July 2026',
+    eligibilityDetails: [
+      'Ghanaian citizen',
+      'Admitted to an accredited tertiary institution in Ghana',
+      'Diploma/HND or undergraduate student',
+      '35 years old or younger',
+      'Must not be benefiting from another scholarship',
+    ],
+    requiredDocuments: [
+      'Admission letter',
+      'Ghana Card',
+      'Academic certificates',
+      'Recent passport photograph',
+      'Transcript or examination results for continuing students',
+    ],
+    applyUrl: 'https://www.ghanagas.com.gh/scholarships',
+    warning: 'Applications are free. Do not pay anyone or share your login details.',
+  },
   {
     id: 'preview-1',
     name: 'Scholarship Name',
@@ -72,10 +110,19 @@ function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; a
         <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
           <GraduationCap className="size-5" aria-hidden="true" />
         </span>
-        <DeadlineBadge daysLeft={scholarship.daysLeft} />
+        <div className="flex items-center gap-2">
+          {scholarship.status && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-2.5 py-0.5 text-[10px] font-bold text-success">
+              <span className="size-1.5 rounded-full bg-success" aria-hidden="true" />
+              {scholarship.status}
+            </span>
+          )}
+          <DeadlineBadge daysLeft={scholarship.daysLeft} />
+        </div>
       </div>
       <h2 className="mt-3 font-heading text-base font-bold text-navy-text">{scholarship.name}</h2>
       <p className="text-xs text-muted-foreground">{scholarship.provider}</p>
+
       <div className="mt-3 flex flex-wrap gap-2">
         <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
           {scholarship.amount}
@@ -83,19 +130,77 @@ function ScholarshipCard({ scholarship, applied }: { scholarship: Scholarship; a
         <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
           {scholarship.eligibility}
         </span>
+        {scholarship.studyLevel && (
+          <span className="rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
+            {scholarship.studyLevel}
+          </span>
+        )}
+        {scholarship.location && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium">
+            <MapPin className="size-3" aria-hidden="true" />
+            {scholarship.location}
+          </span>
+        )}
       </div>
+
+      {scholarship.eligibilityDetails && scholarship.eligibilityDetails.length > 0 && (
+        <div className="mt-3">
+          <p className="text-[11px] font-semibold text-foreground">Eligibility</p>
+          <ul className="mt-1 flex flex-col gap-1">
+            {scholarship.eligibilityDetails.map((item, i) => (
+              <li key={i} className="flex items-start gap-1.5 text-[11px] text-muted-foreground">
+                <Check className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {scholarship.requiredDocuments && scholarship.requiredDocuments.length > 0 && (
+        <div className="mt-3">
+          <p className="text-[11px] font-semibold text-foreground">Required documents</p>
+          <ul className="mt-1 flex flex-col gap-1">
+            {scholarship.requiredDocuments.map((item, i) => (
+              <li key={i} className="flex items-start gap-1.5 text-[11px] text-muted-foreground">
+                <FileText className="mt-0.5 size-3 shrink-0 text-muted-foreground/70" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="mt-4 flex items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground">Deadline: {scholarship.deadline}</p>
-        <span
-          className={cn(
-            'inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold',
-            applied ? 'bg-success/10 text-success' : 'bg-primary text-primary-foreground',
-          )}
-        >
-          {applied ? 'Application started' : 'Apply now'}
-          {!applied && <ExternalLink className="size-3.5" aria-hidden="true" />}
-        </span>
+        {scholarship.applyUrl ? (
+          <a
+            href={scholarship.applyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+          >
+            Apply on Official Portal
+            <ExternalLink className="size-3.5" aria-hidden="true" />
+          </a>
+        ) : (
+          <span
+            className={cn(
+              'inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold',
+              applied ? 'bg-success/10 text-success' : 'bg-primary text-primary-foreground',
+            )}
+          >
+            {applied ? 'Application started' : 'Apply now'}
+            {!applied && <ExternalLink className="size-3.5" aria-hidden="true" />}
+          </span>
+        )}
       </div>
+
+      {scholarship.warning && (
+        <p className="mt-3 text-[10px] leading-relaxed text-amber-600 dark:text-amber-400">
+          {scholarship.warning}
+        </p>
+      )}
     </li>
   )
 }
