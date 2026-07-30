@@ -120,15 +120,15 @@ export function AppFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-1 border-t border-white/10 pt-4 sm:flex-row sm:justify-between sm:gap-0">
-          <p className="text-[10px] text-navy-foreground/50">
+        <div className="flex flex-col items-center gap-2 border-t border-white/15 pt-4 text-center sm:flex-row sm:justify-between sm:gap-0 sm:text-left">
+          <p className="text-xs text-navy-foreground/70">
             Technology For Our Age &copy; {new Date().getFullYear()}
           </p>
-          <div className="flex gap-3">
-            <Link href="#" className="text-[10px] text-navy-foreground/50 transition-colors hover:text-navy-foreground">
+          <div className="flex gap-4">
+            <Link href="#" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
               Terms and Conditions
             </Link>
-            <Link href="#" className="text-[10px] text-navy-foreground/50 transition-colors hover:text-navy-foreground">
+            <Link href="#" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
               Policy
             </Link>
           </div>
