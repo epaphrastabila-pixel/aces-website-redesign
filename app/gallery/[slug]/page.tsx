@@ -14,6 +14,13 @@ export default function CategoryPage() {
   const slug = params.slug as string
   const category = getCategory(slug)
 
+  useEffect(() => {
+    if (!category) {
+      const t = setTimeout(() => router.replace('/gallery'), 3000)
+      return () => clearTimeout(t)
+    }
+  }, [category, router])
+
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [isPlaying, setIsPlaying] = useState(true)
   const [touchStart, setTouchStart] = useState(0)
@@ -66,6 +73,7 @@ export default function CategoryPage() {
       <AppShell title="Not found">
         <section className="flex flex-col items-center justify-center px-6 py-20 text-center">
           <h1 className="font-heading text-lg font-bold text-foreground">Category not found</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Redirecting to gallery…</p>
           <Link href="/gallery" className="mt-4 text-sm font-semibold text-primary underline">
             Back to gallery
           </Link>
