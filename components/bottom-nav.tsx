@@ -40,7 +40,7 @@ export function BottomNav() {
                   href={tab.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border py-2.5 text-[11px] font-medium marketplace-border-glow',
+                    'group relative flex flex-col items-center gap-1 overflow-hidden rounded-full border px-3 py-2 text-[11px] font-medium marketplace-border-glow',
                     'active:scale-[0.97] transition-transform duration-150',
                     'text-navy-text',
                     active && 'text-white',
@@ -48,7 +48,7 @@ export function BottomNav() {
                 >
                   <span
                     className={cn(
-                      'absolute inset-0 rounded-full bg-primary transition-transform duration-300 ease-out',
+                      'absolute inset-0 rounded-full marketplace-hover-fill transition-transform duration-300 ease-out',
                       'motion-reduce:transition-none',
                       active
                         ? 'scale-x-100'
