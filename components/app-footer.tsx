@@ -125,10 +125,10 @@ export function AppFooter() {
             Technology For Our Age &copy; {new Date().getFullYear()}
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
+            <Link href="/terms" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
               Terms and Conditions
             </Link>
-            <Link href="#" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
+            <Link href="/policy" className="text-xs text-navy-foreground/70 transition-colors hover:text-navy-foreground">
               Policy
             </Link>
           </div>

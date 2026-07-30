@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, Home, Info, Users, Briefcase, Images, Lightbulb, Calendar, GraduationCap, BookOpen, ShoppingBag, Store, ChevronRight, ChevronDown, Sun, Moon, Search, Bell } from 'lucide-react'
+import { Menu, X, Home, Info, Users, Briefcase, Images, Lightbulb, Calendar, GraduationCap, BookOpen, ShoppingBag, Store, ChevronRight, ChevronDown, Sun, Moon, Search, Bell, User } from 'lucide-react'
 import { AcesLogo, AcesMark } from '@/components/aces-logo'
 import { useTheme } from 'next-themes'
 import { useSearch } from '@/lib/search-context'
@@ -17,15 +17,16 @@ const primaryLinks = [
   { href: '/about', label: 'About', icon: Info },
   { href: '/shop', label: 'Shop', icon: ShoppingBag },
   { href: '/marketplace', label: 'Marketplace', icon: Store },
+  { href: '/events', label: 'Events', icon: Calendar },
   { href: '/executives', label: 'Executives', icon: Users },
   { href: '/staff', label: 'Staff', icon: Briefcase },
   { href: '/gallery', label: 'Gallery', icon: Images },
   { href: '/scholarships', label: 'Scholarships', icon: GraduationCap },
   { href: '/courses', label: 'Courses', icon: BookOpen },
+  { href: '/profile', label: 'Profile', icon: User },
 ]
 
 const secondaryLinks = [
-  { href: '/events', label: 'Events', icon: Calendar },
   { href: '/problems', label: 'Why we redesigned', icon: Lightbulb },
 ]
 
