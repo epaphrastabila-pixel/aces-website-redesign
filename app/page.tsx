@@ -24,6 +24,7 @@ import {
 } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
 import { FadeIn } from '@/components/fade-in'
+import { DetailModal } from '@/components/detail-modal'
 import { useRegistration } from '@/lib/registration-context'
 import { useAcesAuth } from '@/lib/aces-auth-context'
 import { Button } from '@/components/ui/button'
@@ -44,6 +45,10 @@ const clubs = [
     description: 'Hands-on electronics and embedded systems with real hardware projects.',
     capacity: 30,
     members: 14,
+    meetingDay: 'Every Thursday',
+    meetingTime: '4:00 PM - 6:00 PM',
+    location: 'Engineering Lab 3',
+    whatYouLearn: ['Circuit design & breadboarding', 'Arduino programming (C++)', 'Sensor integration', 'IoT basics'],
   },
   {
     name: 'Coding Club',
@@ -52,6 +57,10 @@ const clubs = [
     description: 'Build beautiful websites and apps with modern frameworks.',
     capacity: 40,
     members: 22,
+    meetingDay: 'Every Wednesday',
+    meetingTime: '3:00 PM - 5:00 PM',
+    location: 'CS Computer Lab',
+    whatYouLearn: ['Web development (React, Next.js)', 'Mobile apps', 'Version control with Git', 'UI/UX design principles'],
   },
   {
     name: 'Robotics Club',
@@ -60,14 +69,18 @@ const clubs = [
     description: 'Design, build and program intelligent robots as a team.',
     capacity: 25,
     members: 18,
+    meetingDay: 'Every Tuesday',
+    meetingTime: '4:00 PM - 6:30 PM',
+    location: 'Robotics Workshop',
+    whatYouLearn: ['Robot kinematics & control', 'Embedded systems programming', 'Sensor fusion & navigation', 'Competition-ready bot building'],
   },
 ]
 
 const events = [
-  { name: 'Career Fair', date: 'Jul 28', image: '/images/career-fair.jpg', detail: 'Meet industry partners across three days — register now!', capacity: 500, registered: 120, regLink: 'https://forms.gle/4J9d7qq1298kEjTWA' },
-  { name: 'CodeFest 2026', date: 'Feb 21', image: '/images/event-codefest.jpg', detail: 'Coding challenges, workshops and networking.', capacity: 120, registered: 98 },
-  { name: 'Robotics Meeting', date: 'Mar 03', image: '/images/event-robotics-meeting.jpg', detail: 'Collaborate, build bots and automate solutions.', capacity: 40, registered: 12 },
-  { name: 'ACES Hangout', date: 'Aug 22', image: '/images/hangout.jpg', detail: 'Games, music and good vibes — a break from the books.', capacity: 100, registered: 44 },
+  { name: 'Career Fair', date: 'Jul 28', time: '10:00 AM - 4:00 PM', location: 'VP Hall', image: '/images/career-fair.jpg', detail: 'Meet industry partners across three days — register now!', capacity: 500, registered: 120, regLink: 'https://forms.gle/4J9d7qq1298kEjTWA' },
+  { name: 'CodeFest 2026', date: 'Feb 21', time: '8:00 AM - 6:00 PM', location: 'CS Department', image: '/images/event-codefest.jpg', detail: 'Coding challenges, workshops and networking.', capacity: 120, registered: 98 },
+  { name: 'Robotics Meeting', date: 'Mar 03', time: '2:00 PM - 5:00 PM', location: 'Robotics Lab', image: '/images/event-robotics-meeting.jpg', detail: 'Collaborate, build bots and automate solutions.', capacity: 40, registered: 12 },
+  { name: 'ACES Hangout', date: 'Aug 22', time: '12:00 PM - 6:00 PM', location: 'ACES Courtyard', image: '/images/hangout.jpg', detail: 'Games, music and good vibes — a break from the books.', capacity: 100, registered: 44 },
 ]
 
 function SeatsBadge({ left, className }: { left: number; className?: string }) {
@@ -195,6 +208,8 @@ export default function HomePage() {
   const { register, isRegistered, joinClub, isMember } = useRegistration()
   const { isAuthenticated } = useAcesAuth()
   const router = useRouter()
+  const [selectedClub, setSelectedClub] = useState<typeof clubs[0] | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null)
   const [joinClubName, setJoinClubName] = useState<string | null>(null)
 
   const galleryImages = [
@@ -301,9 +316,9 @@ export default function HomePage() {
         </div>
         <div className="mt-3 flex gap-3 overflow-x-auto pb-2 scrollbar-none">
           {galleryImages.map((img, i) => (
-            <div key={i} className="relative h-36 w-56 shrink-0 overflow-hidden rounded-2xl">
-              <Image src={img.src} alt={img.alt} fill sizes="224px" className="object-cover" />
-            </div>
+            <Link key={i} href="/gallery" className="relative h-36 w-56 shrink-0 overflow-hidden rounded-2xl block">
+              <Image src={img.src} alt={img.alt} fill sizes="224px" className="object-cover transition-all duration-300 hover:scale-105" />
+            </Link>
           ))}
         </div>
       </section>
@@ -327,8 +342,8 @@ export default function HomePage() {
             const left = Math.max(0, event.capacity - event.registered - (regd ? 1 : 0))
             const hasRegLink = 'regLink' in event
             return (
-              <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
-                <Link href="/events" className="relative aspect-[4/3] overflow-hidden bg-muted block">
+              <li key={event.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5 cursor-pointer">
+                <div className="relative aspect-[4/3] overflow-hidden bg-muted" onClick={() => setSelectedEvent(event)}>
                   <Image src={event.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   <span className="absolute left-2 top-2 rounded-full bg-black/30 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
                     {event.date}
@@ -336,8 +351,8 @@ export default function HomePage() {
                   <span className="absolute right-2 top-2">
                     <SeatsBadge left={left} className="bg-black/40 backdrop-blur-sm text-white!" />
                   </span>
-                </Link>
-                <div className="flex flex-1 flex-col gap-1 p-3">
+                </div>
+                <div className="flex flex-1 flex-col gap-1 p-3" onClick={() => setSelectedEvent(event)}>
                   <h2 className="text-sm font-semibold leading-snug text-foreground">{event.name}</h2>
                   <p className="text-xs text-muted-foreground line-clamp-2">{event.detail}</p>
                   <div className="mt-auto flex items-center justify-between pt-2">
@@ -349,13 +364,15 @@ export default function HomePage() {
                         rel="noopener noreferrer"
                         aria-label={`Register for ${event.name}`}
                         className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:opacity-90 hover:scale-110 active:scale-90"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <ExternalLink className="size-3.5" aria-hidden="true" />
                       </a>
                     ) : (
                       <Button
                         type="button"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation()
                           if (!isAuthenticated) { router.push('/login?redirect=/'); return }
                           register(event.name)
                         }}
@@ -392,15 +409,15 @@ export default function HomePage() {
             const member = isMember(club.name)
             const spots = club.capacity - club.members - (member ? 1 : 0)
             return (
-              <div key={club.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5">
-                <Link href="/events" className="relative aspect-[4/3] overflow-hidden bg-muted block">
+              <div key={club.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 card-border-glow hover:shadow-lg hover:shadow-primary/5 cursor-pointer" onClick={() => setSelectedClub(club)}>
+                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image src={club.image} alt="" fill sizes="400px" className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-[2deg]" aria-hidden="true" />
                   {member && (
                     <span className="absolute right-2 top-2 rounded-full bg-success/30 px-2 py-0.5 text-[10px] font-bold text-success backdrop-blur-sm">
                       Member ✓
                     </span>
                   )}
-                </Link>
+                </div>
                 <div className="flex flex-1 flex-col gap-1 p-3">
                   <h2 className="text-sm font-semibold leading-snug text-foreground">ACES {club.name}</h2>
                   <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{club.description}</p>
@@ -410,7 +427,8 @@ export default function HomePage() {
                   <div className="mt-auto flex items-center justify-end pt-2">
                     <Button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         if (member) return
                         if (!isAuthenticated) { router.push('/login?redirect=/'); return }
                         setJoinClubName(club.name)
@@ -437,6 +455,38 @@ export default function HomePage() {
       </FadeIn>
 
       {joinClubName && <JoinForm club={joinClubName} onClose={() => setJoinClubName(null)} />}
+
+      {selectedClub && (
+        <DetailModal
+          detail={{
+            type: 'club',
+            data: selectedClub,
+            isMember: isMember(selectedClub.name),
+            onJoin: () => {
+              if (!isAuthenticated) { router.push('/login?redirect=/'); return }
+              setSelectedClub(null)
+              setJoinClubName(selectedClub.name)
+            },
+          }}
+          onClose={() => setSelectedClub(null)}
+        />
+      )}
+
+      {selectedEvent && (
+        <DetailModal
+          detail={{
+            type: 'event',
+            data: selectedEvent,
+            isRegistered: isRegistered(selectedEvent.name),
+            onRegister: () => {
+              if (!isAuthenticated) { router.push('/login?redirect=/'); return }
+              register(selectedEvent.name)
+              setSelectedEvent(null)
+            },
+          }}
+          onClose={() => setSelectedEvent(null)}
+        />
+      )}
 
       {/* Testimonial */}
       <FadeIn delay={250}>

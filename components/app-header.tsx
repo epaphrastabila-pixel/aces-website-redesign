@@ -58,10 +58,10 @@ export function AppHeader({ title }: { title?: string }) {
     <>
       <header className="header-enhanced sticky top-0 z-40 mx-auto flex w-full max-w-md items-center justify-between bg-background/95 px-4 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/85">
         {title ? (
-          <span className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <AcesMark className="size-7 text-primary logo-glow" />
             <span className="font-heading text-base font-bold text-navy-text">{title}</span>
-          </span>
+          </Link>
         ) : (
           <Link href="/" aria-label="ACES KNUST home">
             <span className="logo-glow inline-block"><AcesLogo /></span>
