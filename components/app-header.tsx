@@ -56,15 +56,15 @@ export function AppHeader({ title }: { title?: string }) {
 
   return (
     <>
-      <header className="sticky top-0 z-40 mx-auto flex w-full max-w-md items-center justify-between border-b border-border bg-background/95 px-4 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/85">
+      <header className="header-enhanced sticky top-0 z-40 mx-auto flex w-full max-w-md items-center justify-between bg-background/95 px-4 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/85">
         {title ? (
           <span className="flex items-center gap-2">
-            <AcesMark className="size-7 text-primary" />
+            <AcesMark className="size-7 text-primary logo-glow" />
             <span className="font-heading text-base font-bold text-navy-text">{title}</span>
           </span>
         ) : (
           <Link href="/" aria-label="ACES KNUST home">
-            <AcesLogo />
+            <span className="logo-glow inline-block"><AcesLogo /></span>
           </Link>
         )}
         <div className="flex items-center gap-1.5">
@@ -74,14 +74,14 @@ export function AppHeader({ title }: { title?: string }) {
             aria-label="Search"
             variant="ghost"
             size="icon"
-            className="rounded-full text-muted-foreground hover:bg-secondary"
+            className="rounded-full text-muted-foreground hover:bg-secondary header-icon-glow"
           >
             <Search className="size-5" aria-hidden="true" />
           </Button>
           <Link
             href="/notifications"
             aria-label={`Notifications, ${hydrated ? unreadCount : 0} unread`}
-            className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary"
+            className="relative flex size-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary header-icon-glow"
           >
             <Bell className="size-5" aria-hidden="true" />
             {hydrated && unreadCount > 0 && (
@@ -96,7 +96,7 @@ export function AppHeader({ title }: { title?: string }) {
             aria-label={mounted ? `Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode` : 'Toggle theme'}
             variant="secondary"
             size="icon"
-            className="rounded-full border-none hover:bg-accent"
+            className="rounded-full border-none hover:bg-accent header-icon-glow"
           >
             <AnimatePresence mode="wait">
               {mounted && (
@@ -120,7 +120,7 @@ export function AppHeader({ title }: { title?: string }) {
             aria-expanded={open}
             variant="secondary"
             size="icon"
-            className="rounded-full border-none hover:bg-accent"
+            className="rounded-full border-none hover:bg-accent header-icon-glow"
           >
             <Menu className="size-5" aria-hidden="true" />
           </Button>

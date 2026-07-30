@@ -345,3 +345,62 @@
 .marketplace-border-glow-temporal {
   animation: marketplace-border-glow-temporal 5s ease-in-out infinite;
 }
+
+/* ── Header Effects ── */
+
+/* 1. Glass morphism depth — subtle animated gradient behind backdrop */
+.header-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.03), rgba(139,92,246,0.03), rgba(236,72,153,0.03), rgba(6,182,212,0.03));
+  background-size: 400% 400%;
+  animation: header-glass-shift 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes header-glass-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 2. Animated gradient bottom border */
+.header-enhanced::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #06b6d4, #6366f1);
+  background-size: 300% 100%;
+  animation: header-border-flow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes header-border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 3. Header icon glow on hover */
+@keyframes header-icon-glow {
+  0%, 100% { box-shadow: 0 0 6px 2px rgba(99,102,241,0.25); }
+  33% { box-shadow: 0 0 6px 2px rgba(139,92,246,0.25); }
+  66% { box-shadow: 0 0 6px 2px rgba(236,72,153,0.25); }
+}
+
+.header-icon-glow:hover {
+  animation: header-icon-glow 3s ease-in-out infinite;
+}
+
+/* 4. Logo subtle glow */
+@keyframes logo-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(11,95,255,0.2)); }
+  50% { filter: drop-shadow(0 0 8px rgba(11,95,255,0.4)); }
+}
+
+.logo-glow {
+  animation: logo-glow 3s ease-in-out infinite;
+}
