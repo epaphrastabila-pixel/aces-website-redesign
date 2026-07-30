@@ -69,7 +69,7 @@ export function BottomNav() {
                   aria-current={active ? 'page' : undefined}
                   className={cn(
                     'relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
-                    active ? 'text-primary' : 'text-muted-foreground',
+                    active ? 'text-primary marketplace-border-glow rounded-full border border-transparent' : 'text-muted-foreground',
                   )}
                 >
                   <span className="relative">
