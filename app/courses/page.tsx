@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { BookOpen, GraduationCap, Layers } from 'lucide-react'
+import { BookOpen, GraduationCap, SearchX, ArrowLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AppShell } from '@/components/app-shell'
 import { FadeIn } from '@/components/fade-in'
@@ -114,18 +114,36 @@ export default function CoursesPage() {
               animate={{ opacity: 1 }}
               className="flex flex-col items-center py-16 text-center"
             >
-              <Layers className="size-10 text-muted-foreground/40" aria-hidden="true" />
-              <p className="mt-3 text-sm font-medium text-foreground">No lecture materials uploaded yet.</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Check back later or enable notifications.
-              </p>
-              {!notified && (
-                <Button
-                  onClick={onNotify}
-                  className="mt-4 rounded-full px-5 py-2.5 text-xs font-bold"
-                >
-                  Notify Me
-                </Button>
+              {q ? (
+                <>
+                  <SearchX className="size-10 text-muted-foreground/40" aria-hidden="true" />
+                  <p className="mt-3 text-sm font-medium text-foreground">No matching courses</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    We couldn&apos;t find a course matching &ldquo;{search}&rdquo;.
+                  </p>
+                  <Button
+                    type="button"
+                    onClick={() => setSearch('')}
+                    className="mt-4 rounded-full px-5 py-2.5 text-xs font-bold"
+                  >
+                    Clear Search
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <BookOpen className="size-10 text-muted-foreground/40" aria-hidden="true" />
+                  <p className="mt-3 text-sm font-medium text-foreground">No courses available</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    There are currently no courses available for Year {year}, {semester === 'Sem 1' ? 'First' : 'Second'} Semester.
+                  </p>
+                  <Button
+                    type="button"
+                    onClick={() => setSemester(semester === 'Sem 1' ? 'Sem 2' : 'Sem 1')}
+                    className="mt-4 rounded-full px-5 py-2.5 text-xs font-bold"
+                  >
+                    Switch to {semester === 'Sem 1' ? 'Semester 2' : 'Semester 1'}
+                  </Button>
+                </>
               )}
             </motion.div>
           )}

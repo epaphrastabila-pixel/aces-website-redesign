@@ -1,10 +1,14 @@
 'use client'
 
+'use client'
+
+import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, BookOpen, GraduationCap, User, Clock } from 'lucide-react'
+import { ArrowLeft, BookOpen, GraduationCap, User, Clock, Bell } from 'lucide-react'
 import { AppShell } from '@/components/app-shell'
 import { CourseResourceItem } from '@/components/courses/course-resource-item'
+import { Button } from '@/components/ui/button'
 import { courses, yearLabels, semesterLabels, yearThemes, type Resource } from '@/lib/courses-data'
 
 const sectionOrder: { key: Resource['type']; label: string }[] = [
@@ -22,6 +26,7 @@ export default function CourseDetailPage() {
 
   const course = courses.find((c) => c.code.toUpperCase() === code)
   const theme = course ? yearThemes[course.year] : yearThemes[1]
+  const [notifyClicked, setNotifyClicked] = useState(false)
 
   if (!course) {
     return (
@@ -107,9 +112,36 @@ export default function CourseDetailPage() {
 
         {course.resources.length === 0 && (
           <div className="flex flex-col items-center py-16 text-center">
-            <BookOpen className="size-10 text-muted-foreground/40" aria-hidden="true" />
-            <p className="mt-3 text-sm font-medium text-foreground">No lecture materials uploaded yet.</p>
-            <p className="mt-1 text-xs text-muted-foreground">Check back later or enable notifications.</p>
+            <span
+              className="flex size-14 items-center justify-center rounded-full"
+              style={{ backgroundColor: theme.light, color: theme.primary }}
+            >
+              <BookOpen className="size-7" aria-hidden="true" />
+            </span>
+            <p className="mt-4 font-heading text-lg font-bold text-foreground">No materials yet</p>
+            <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              Lecture slides, past questions and other resources have not been uploaded for {course.code} yet.
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              We&apos;ll let you know when new materials become available.
+            </p>
+            <div className="mt-5 flex gap-3">
+              <Button
+                type="button"
+                onClick={() => setNotifyClicked(true)}
+                disabled={notifyClicked}
+                className="rounded-full px-5 py-2.5 text-xs font-bold"
+              >
+                <Bell className="size-3.5 mr-1.5" aria-hidden="true" />
+                {notifyClicked ? "You'll be notified" : 'Notify Me'}
+              </Button>
+              <Link
+                href="/courses"
+                className="inline-flex items-center rounded-full border border-border bg-card px-5 py-2.5 text-xs font-semibold text-foreground transition-colors hover:bg-secondary"
+              >
+                Back to Courses
+              </Link>
+            </div>
           </div>
         )}
       </section>
