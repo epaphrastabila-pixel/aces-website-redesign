@@ -53,37 +53,12 @@ export const courses: Course[] = [
   { code: 'MATH 151', title: 'Algebra', year: 1, semester: 'Sem 1', credits: 4, lecturer: '', description: '', resources: [] },
   { code: 'ME 159', title: 'Technical Drawing', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
   { code: 'ME 161', title: 'Basic Mechanics', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '', resources: [] },
-  {
-    code: 'COE 152', title: 'Basic Electronics II', year: 1, semester: 'Sem 2',
-    credits: 4, lecturer: 'Dr. A. S. Agbemenu', description: 'Operational amplifiers, feedback theory, oscillators, and introduction to power electronics.',
-    resources: [
-      r('152-s1', 'Lecture Slides — Op-Amps', 'slide', 'pptx', '4.1 MB', 'Feb 12, 2026'),
-      r('152-s2', 'Lecture Slides — Oscillators & Timers', 'slide', 'pptx', '3.7 MB', 'Mar 18, 2026'),
-      r('152-n1', 'Op-Amp Circuit Notes', 'note', 'pdf', '2.0 MB', 'Feb 16, 2026'),
-      r('152-lab1', 'Lab Manual — Op-Amp Applications', 'lab-manual', 'pdf', '1.2 MB', 'Feb 20, 2026'),
-      r('152-pq1', 'End-of-Sem Past Questions', 'past-question', 'pdf', '1.6 MB', 'May 08, 2026'),
-    ],
-  },
-  {
-    code: 'COE 154', title: 'Introduction to Programming II', year: 1, semester: 'Sem 2',
-    credits: 4, lecturer: 'Dr. P. Y. Okyere', description: 'Object-oriented programming in C++: classes, inheritance, polymorphism, file I/O, and STL containers.',
-    resources: [
-      r('154-s1', 'Lecture Slides — Classes & Objects', 'slide', 'pptx', '3.5 MB', 'Feb 14, 2026'),
-      r('154-s2', 'Lecture Slides — Inheritance & Polymorphism', 'slide', 'pptx', '4.2 MB', 'Mar 22, 2026'),
-      r('154-n1', 'OOP Cheatsheet', 'note', 'pdf', '1.1 MB', 'Feb 18, 2026'),
-      r('154-a1', 'Assignment — Inheritance Hierarchy', 'assignment', 'pdf', '0.8 MB', 'Apr 05, 2026'),
-    ],
-  },
-  {
-    code: 'COE 172', title: 'Engineering Mathematics II', year: 1, semester: 'Sem 2',
-    credits: 3, lecturer: 'Dr. J. K. Arthur', description: 'Vectors, matrices, systems of linear equations, eigenvalues, and introductory differential equations.',
-    resources: [
-      r('172-s1', 'Lecture Slides — Linear Algebra', 'slide', 'pptx', '3.0 MB', 'Feb 10, 2026'),
-      r('172-s2', 'Lecture Slides — Differential Equations', 'slide', 'pptx', '3.6 MB', 'Mar 28, 2026'),
-      r('172-n1', 'Matrix Operations Workbook', 'note', 'pdf', '2.3 MB', 'Feb 14, 2026'),
-      r('172-pq1', 'Past Questions — With Solutions', 'past-question', 'pdf', '2.8 MB', 'Apr 20, 2026'),
-    ],
-  },
+  { code: 'COE 152', title: 'Basic Electronics', year: 1, semester: 'Sem 2', credits: 3, lecturer: '', description: '', resources: [] },
+  { code: 'COE 158', title: 'Introduction to Information Technology', year: 1, semester: 'Sem 2', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'EE 156', title: 'Electrical Eng. Drawing', year: 1, semester: 'Sem 2', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'EE 172', title: 'Electrical Machines', year: 1, semester: 'Sem 2', credits: 3, lecturer: '', description: '', resources: [] },
+  { code: 'ENGL 158', title: 'Communication Skills II', year: 1, semester: 'Sem 2', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'MATH 152', title: 'Calculus with Analysis', year: 1, semester: 'Sem 2', credits: 4, lecturer: '', description: '', resources: [] },
 
   // ═══ Year 2 ═══
   {

@@ -120,7 +120,7 @@ export function AppFooter() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/10 pt-4">
+        <div className="flex flex-col items-center gap-1 border-t border-white/10 pt-4 sm:flex-row sm:justify-between sm:gap-0">
           <p className="text-[10px] text-navy-foreground/50">
             Technology For Our Age &copy; {new Date().getFullYear()}
           </p>
