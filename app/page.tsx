@@ -255,7 +255,7 @@ export default function HomePage() {
             sizes="(max-width: 448px) 100vw, 448px"
             className="object-cover"
           />
-          <div className="absolute inset-0 animate-hero-shift opacity-20" aria-hidden="true" />
+          <div className="absolute inset-0 animate-hero-shift opacity-10" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" aria-hidden="true" />
           <div className="absolute bottom-0 left-0 right-0 p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/90 drop-shadow-sm">Akwaaba, welcome back</p>
