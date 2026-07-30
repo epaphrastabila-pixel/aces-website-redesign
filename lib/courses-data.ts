@@ -45,39 +45,14 @@ const sem2: Resource[] = [
 ]
 
 export const courses: Course[] = [
-  // ═══ Year 1 ═══
-  {
-    code: 'COE 151', title: 'Basic Electronics I', year: 1, semester: 'Sem 1',
-    credits: 4, lecturer: 'Dr. A. S. Agbemenu', description: 'Fundamental principles of analogue electronics including semiconductor theory, diodes, and transistor circuits.',
-    resources: [
-      r('151-s1', 'Lecture Slides — Diodes & Rectifiers', 'slide', 'pptx', '3.8 MB', 'Sep 14, 2025'),
-      r('151-s2', 'Lecture Slides — Transistor Amplifiers', 'slide', 'pptx', '4.5 MB', 'Oct 20, 2025'),
-      r('151-n1', 'Circuit Analysis Notes', 'note', 'pdf', '2.4 MB', 'Sep 18, 2025'),
-      r('151-pq1', 'Mid-Sem Exam — Past Questions', 'past-question', 'pdf', '1.1 MB', 'Oct 28, 2025'),
-      r('151-lab1', 'Lab 1 — Diode Characteristics', 'lab-manual', 'pdf', '0.8 MB', 'Sep 22, 2025'),
-    ],
-  },
-  {
-    code: 'COE 153', title: 'Introduction to Programming I', year: 1, semester: 'Sem 1',
-    credits: 4, lecturer: 'Dr. P. Y. Okyere', description: 'Introduction to problem-solving using C++. Topics include variables, control structures, functions, and arrays.',
-    resources: [
-      r('153-s1', 'Lecture Slides — Variables & Control Flow', 'slide', 'pptx', '3.2 MB', 'Sep 14, 2025'),
-      r('153-s2', 'Lecture Slides — Functions & Arrays', 'slide', 'pptx', '4.0 MB', 'Oct 18, 2025'),
-      r('153-n1', 'C++ Quick Reference Guide', 'note', 'pdf', '1.5 MB', 'Sep 20, 2025'),
-      r('153-a1', 'Assignment 1 — Loops & Conditionals', 'assignment', 'pdf', '0.6 MB', 'Oct 05, 2025'),
-      r('153-a2', 'Assignment 2 — Array Manipulation', 'assignment', 'pdf', '0.7 MB', 'Nov 02, 2025'),
-    ],
-  },
-  {
-    code: 'COE 155', title: 'Engineering Mathematics I', year: 1, semester: 'Sem 1',
-    credits: 3, lecturer: 'Dr. J. K. Arthur', description: 'Analytic geometry, limits, differentiation, and integration of algebraic and transcendental functions.',
-    resources: [
-      r('155-s1', 'Lecture Slides — Differentiation', 'slide', 'pptx', '2.9 MB', 'Sep 16, 2025'),
-      r('155-s2', 'Lecture Slides — Integration Techniques', 'slide', 'pptx', '3.4 MB', 'Oct 25, 2025'),
-      r('155-n1', 'Formula Sheet & Derivations', 'note', 'pdf', '1.8 MB', 'Sep 22, 2025'),
-      r('155-pq1', 'Past Questions — All Topics', 'past-question', 'pdf', '2.2 MB', 'Nov 15, 2025'),
-    ],
-  },
+  // ═══ Year 1 — Semester 1 ═══
+  { code: 'CE 155', title: 'Environmental Studies', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'COE 153', title: 'Engineering Technology', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'COE 181', title: 'Applied Electricity', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '', resources: [] },
+  { code: 'ENGL 157', title: 'Communication Skills I', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'MATH 151', title: 'Algebra', year: 1, semester: 'Sem 1', credits: 4, lecturer: '', description: '', resources: [] },
+  { code: 'ME 159', title: 'Technical Drawing', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
+  { code: 'ME 161', title: 'Basic Mechanics', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '', resources: [] },
   {
     code: 'COE 152', title: 'Basic Electronics II', year: 1, semester: 'Sem 2',
     credits: 4, lecturer: 'Dr. A. S. Agbemenu', description: 'Operational amplifiers, feedback theory, oscillators, and introduction to power electronics.',
