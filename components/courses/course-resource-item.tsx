@@ -29,6 +29,17 @@ export function CourseResourceItem({ resource, theme }: Props) {
     setTimeout(() => setDownloaded(false), 2000)
   }
 
+  function handlePreview(e: React.MouseEvent) {
+    if (!href || resource.format !== 'pptx') return
+    e.preventDefault()
+    const absolute = new URL(resource.url!, window.location.origin).href
+    window.open(
+      'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(absolute),
+      '_blank',
+      'noopener',
+    )
+  }
+
   return (
     <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:bg-secondary/30" style={{ borderColor: theme.border }}>
       <span className="flex size-10 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: theme.light, color: theme.primary }}>
@@ -71,6 +82,7 @@ export function CourseResourceItem({ resource, theme }: Props) {
         {href ? (
           <a
             href={href}
+            onClick={handlePreview}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Preview ${resource.name}`}
