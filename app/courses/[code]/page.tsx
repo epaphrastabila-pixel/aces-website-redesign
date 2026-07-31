@@ -22,7 +22,14 @@ const sectionOrder: { key: Resource['type']; label: string }[] = [
 
 export default function CourseDetailPage() {
   const params = useParams()
-  const code = (params.code as string).toUpperCase()
+  const rawCode = Array.isArray(params.code) ? params.code[0] : (params.code as string)
+  let decoded = rawCode
+  try {
+    decoded = decodeURIComponent(rawCode)
+  } catch {
+    decoded = rawCode
+  }
+  const code = decoded.toUpperCase()
 
   const course = courses.find((c) => c.code.toUpperCase() === code)
   const theme = course ? yearThemes[course.year] : yearThemes[1]
