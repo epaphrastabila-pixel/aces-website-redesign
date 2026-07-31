@@ -5,6 +5,7 @@ export type Resource = {
   format: 'pdf' | 'pptx' | 'docx' | 'mp4' | 'zip'
   fileSize: string
   uploadDate: string
+  url?: string
 }
 
 export type Course = {
@@ -25,8 +26,11 @@ function r(
   format: Resource['format'],
   fileSize: string,
   uploadDate: string,
+  url?: string,
 ): Resource {
-  return { id, name, type, format, fileSize, uploadDate }
+  return url
+    ? { id, name, type, format, fileSize, uploadDate, url }
+    : { id, name, type, format, fileSize, uploadDate }
 }
 
 const sem1: Resource[] = [
@@ -46,13 +50,61 @@ const sem2: Resource[] = [
 
 export const courses: Course[] = [
   // ═══ Year 1 — Semester 1 ═══
-  { code: 'CE 155', title: 'Environmental Studies', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
-  { code: 'COE 153', title: 'Engineering Technology', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
-  { code: 'COE 181', title: 'Applied Electricity', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '', resources: [] },
-  { code: 'ENGL 157', title: 'Communication Skills I', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
-  { code: 'MATH 151', title: 'Algebra', year: 1, semester: 'Sem 1', credits: 4, lecturer: '', description: '', resources: [] },
+  {
+    code: 'CE 155', title: 'Environmental Studies', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '',
+    resources: [
+      r('ce155-1', 'CE 155_ Unit 1', 'slide', 'pdf', '2.8 MB', 'Jul 31, 2026', '/Courses/Environmental Studies/CE 155_ Unit 1.pdf'),
+      r('ce155-2', 'CE 155_ Unit 2', 'slide', 'pdf', '3.2 MB', 'Jul 31, 2026', '/Courses/Environmental Studies/CE 155_ Unit 2 [Autosaved].pdf'),
+      r('ce155-3', 'CE155_ Unit 3', 'slide', 'pdf', '2.5 MB', 'Jul 31, 2026', '/Courses/Environmental Studies/CE155_ Unit 3 [Autosaved].pdf'),
+    ],
+  },
+  {
+    code: 'COE 153', title: 'Engineering Technology', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '',
+    resources: [
+      r('coe153-1', 'Lecture Slides', 'slide', 'pptx', '7.4 MB', 'Jul 31, 2026', '/Courses/Engineering Technology/ac7a0d76123ef416356c74dd9c793725.pptx'),
+      r('coe153-2', 'HTML AND CSS', 'slide', 'pptx', '486 KB', 'Jul 31, 2026', '/Courses/Engineering Technology/HTML AND CSS.pptx'),
+      r('coe153-3', 'LAB. Presentation1 Bismark', 'slide', 'pptx', '9.6 MB', 'Jul 31, 2026', '/Courses/Engineering Technology/LAB. Presentation1 Bismark.pptx'),
+      r('coe153-4', 'CE 155_ Unit 4', 'slide', 'pdf', '441 KB', 'Jul 31, 2026', '/Courses/Engineering Technology/CE 155_ Unit 4.pdf'),
+      r('coe153-5', 'ACTIVITY 6', 'assignment', 'pdf', '69 KB', 'Jul 31, 2026', '/Courses/Engineering Technology/ACTIVITY 6.pdf'),
+      r('coe153-6', 'ACTIVITY 7', 'assignment', 'pdf', '84 KB', 'Jul 31, 2026', '/Courses/Engineering Technology/ACTIVITY 7 pdf.pdf'),
+      r('coe153-7', 'ACTIVITY 9', 'assignment', 'pdf', '134 KB', 'Jul 31, 2026', '/Courses/Engineering Technology/ACTIVITY 9.pdf'),
+      r('coe153-8', 'Getting Started in KiCad 7', 'lab-manual', 'pdf', '2.2 MB', 'Jul 31, 2026', '/Courses/Engineering Technology/getting_started_in_kicad_7.pdf'),
+    ],
+  },
+  {
+    code: 'COE 181', title: 'Applied Electricity', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '',
+    resources: [
+      r('coe181-1', 'Unit 1', 'slide', 'pptx', '4.4 MB', 'Jul 31, 2026', '/Courses/Applied Electicity/Unit1-EE151.pptx'),
+      r('coe181-2', 'Unit 2', 'slide', 'pptx', '1.7 MB', 'Jul 31, 2026', '/Courses/Applied Electicity/Unit2-EE151.pptx'),
+      r('coe181-3', 'Unit 3', 'slide', 'pptx', '672 KB', 'Jul 31, 2026', '/Courses/Applied Electicity/Unit3-EE151.pptx'),
+      r('coe181-4', 'Unit 4', 'slide', 'pptx', '335 KB', 'Jul 31, 2026', '/Courses/Applied Electicity/Unit4-EE151.pptx'),
+    ],
+  },
+  {
+    code: 'ENGL 157', title: 'Communication Skills I', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '',
+    resources: [
+      r('engl157-1', 'final PUNCTUATION IN ENGLISH LECTURE SLIDES', 'slide', 'pptx', '415 KB', 'Jul 31, 2026', '/Courses/Communication Skills 1/final PUNCTUATION IN ENGLISH LECTURE SLIDES.pptx'),
+      r('engl157-2', 'finalCONCORD IN ENGLISH LECTURE SLIDES-1', 'slide', 'pptx', '449 KB', 'Jul 31, 2026', '/Courses/Communication Skills 1/finalCONCORD IN ENGLISH LECTURE SLIDES-1.pptx'),
+      r('engl157-3', 'Afreh 2006', 'note', 'pdf', '96 MB', 'Jul 31, 2026', '/Courses/Communication Skills 1/Afreh 2006.pdf'),
+    ],
+  },
+  {
+    code: 'MATH 151', title: 'Algebra', year: 1, semester: 'Sem 1', credits: 4, lecturer: '', description: '',
+    resources: [
+      r('math151-1', 'Algebra Slide-2', 'slide', 'pdf', '440 KB', 'Jul 31, 2026', '/Courses/Algebra/Algebra Slide-2.pdf'),
+      r('math151-2', 'Algebra Slide-5', 'slide', 'pdf', '564 KB', 'Jul 31, 2026', '/Courses/Algebra/Algebra Slide-5.pdf'),
+      r('math151-3', 'MATH_151', 'note', 'pdf', '1.1 MB', 'Jul 31, 2026', '/Courses/Algebra/MATH_151.pdf'),
+      r('math151-4', 'MATH-161', 'note', 'pdf', '655 KB', 'Jul 31, 2026', '/Courses/Algebra/MATH-161.pdf'),
+      r('math151-5', 'keep204', 'note', 'pdf', '161 KB', 'Jul 31, 2026', '/Courses/Algebra/keep204.pdf'),
+    ],
+  },
   { code: 'ME 159', title: 'Technical Drawing', year: 1, semester: 'Sem 1', credits: 2, lecturer: '', description: '', resources: [] },
-  { code: 'ME 161', title: 'Basic Mechanics', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '', resources: [] },
+  {
+    code: 'ME 161', title: 'Basic Mechanics', year: 1, semester: 'Sem 1', credits: 3, lecturer: '', description: '',
+    resources: [
+      r('me161-1', 'ME 161', 'note', 'pdf', '5.6 MB', 'Jul 31, 2026', '/Courses/Basic Mechanic/ME 161.pdf'),
+    ],
+  },
   { code: 'COE 152', title: 'Basic Electronics', year: 1, semester: 'Sem 2', credits: 3, lecturer: '', description: '', resources: [] },
   { code: 'COE 158', title: 'Introduction to Information Technology', year: 1, semester: 'Sem 2', credits: 2, lecturer: '', description: '', resources: [] },
   { code: 'EE 156', title: 'Electrical Eng. Drawing', year: 1, semester: 'Sem 2', credits: 2, lecturer: '', description: '', resources: [] },

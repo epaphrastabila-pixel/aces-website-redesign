@@ -22,6 +22,7 @@ type Props = {
 export function CourseResourceItem({ resource, theme }: Props) {
   const [downloaded, setDownloaded] = useState(false)
   const Icon = formatIcon[resource.format] || FileText
+  const href = resource.url ? encodeURI(resource.url) : undefined
 
   function handleDownload() {
     setDownloaded(true)
@@ -44,27 +45,51 @@ export function CourseResourceItem({ resource, theme }: Props) {
       </div>
 
       <div className="flex shrink-0 items-center gap-1">
-        <Button
-          type="button"
-          onClick={handleDownload}
-          aria-label={`Download ${resource.name}`}
-          variant="default"
-          size="icon"
-          className={cn('size-9 rounded-full border-none', downloaded ? 'bg-success/15 text-success' : '')}
-          style={!downloaded ? { backgroundColor: theme.primary, color: '#fff' } as React.CSSProperties : undefined}
-        >
-          {downloaded ? <Check className="size-4" /> : <Download className="size-4" />}
-        </Button>
-        <Button
-          type="button"
-          onClick={() => {}}
-          aria-label={`Preview ${resource.name}`}
-          variant="secondary"
-          size="icon"
-          className="size-9 rounded-full border-none hover:bg-accent"
-        >
-          <Eye className="size-4" />
-        </Button>
+        {href ? (
+          <a
+            href={href}
+            download
+            aria-label={`Download ${resource.name}`}
+            className="flex size-9 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95"
+            style={{ backgroundColor: theme.primary, color: '#fff' }}
+          >
+            <Download className="size-4" />
+          </a>
+        ) : (
+          <Button
+            type="button"
+            onClick={handleDownload}
+            aria-label={`Download ${resource.name}`}
+            variant="default"
+            size="icon"
+            className={cn('size-9 rounded-full border-none', downloaded ? 'bg-success/15 text-success' : '')}
+            style={!downloaded ? { backgroundColor: theme.primary, color: '#fff' } as React.CSSProperties : undefined}
+          >
+            {downloaded ? <Check className="size-4" /> : <Download className="size-4" />}
+          </Button>
+        )}
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Preview ${resource.name}`}
+            className="flex size-9 items-center justify-center rounded-full border-none bg-secondary text-foreground transition-colors hover:bg-accent"
+          >
+            <Eye className="size-4" />
+          </a>
+        ) : (
+          <Button
+            type="button"
+            onClick={() => {}}
+            aria-label={`Preview ${resource.name}`}
+            variant="secondary"
+            size="icon"
+            className="size-9 rounded-full border-none hover:bg-accent"
+          >
+            <Eye className="size-4" />
+          </Button>
+        )}
       </div>
     </div>
   )
